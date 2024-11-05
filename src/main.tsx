@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import {LoginPage} from "./pages/LoginPage.tsx";
 import MainPage from "./pages/MainPage.tsx";
+import RootPage from "./pages/root/RootPage.tsx";
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
@@ -16,13 +17,13 @@ createRoot(document.getElementById('root')!).render(
             <RouterProvider router={
                 createBrowserRouter(
                     createRoutesFromElements(
-                        <Route path="/frontend">
-                            <Route index element={<MainPage/>}></Route>
+                        <Route path="/frontend" element={<RootPage/>}>
+                            <Route index element={<MainPage/>}/>
                             <Route path="login" element={<LoginPage/>}/>
                         </Route>
                     )
                 )
             }/>
         </AuthProvider>
-    </StrictMode>,
+    </StrictMode>
 )
