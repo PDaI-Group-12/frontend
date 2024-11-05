@@ -1,7 +1,7 @@
 import {Outlet} from "react-router-dom";
 import {
     AppBar,
-    Box,
+    Box, Container,
     CssBaseline,
     Divider,
     Drawer,
@@ -90,9 +90,11 @@ export default function RootPage() {
                     </Box>
                 </Drawer>
             </nav>
-            <Box component="main" sx={{p: 3}}>
+            <Box component="main" sx={{flexGrow: 1, p: 3}}>
                 <Toolbar/>
-                <Outlet/>
+                <Container maxWidth="xl">
+                    <Outlet/>
+                </Container>
             </Box>
         </Box>
     )

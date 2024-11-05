@@ -8,7 +8,7 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import {LoginPage} from "./pages/LoginPage.tsx";
-import RootPage from "./pages/root/RootPage.tsx";
+import RootPage from "./pages/RootPage.tsx";
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
