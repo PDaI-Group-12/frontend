@@ -1,5 +1,6 @@
 import {useAuth} from "../hooks/useAuth.tsx";
 import {useNavigate} from "react-router-dom";
+import {TextField, Typography} from "@mui/material";
 
 export function LoginPage() {
 
@@ -10,11 +11,8 @@ export function LoginPage() {
 
     return (
         <>
-            <h1>PDaI</h1>
-            <label>
-                Login
-                <input type="text"/>
-            </label>
+            <Typography variant="h2">PDaI</Typography>
+            <TextField label="Login" type="text"/>
         </>
     )
 }
