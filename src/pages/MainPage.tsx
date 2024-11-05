@@ -1,10 +1,11 @@
 import {useNavigate} from "react-router-dom";
+import {Button} from "@mui/material";
 
 export default function MainPage() {
 
     const navigate = useNavigate()
 
     return (
-        <button onClick={() => navigate("login")}>Login</button>
+        <Button variant="contained" color="success" onClick={() => navigate("login")}>Login</Button>
     )
 }
