@@ -8,7 +8,6 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import {LoginPage} from "./pages/LoginPage.tsx";
-import MainPage from "./pages/MainPage.tsx";
 import RootPage from "./pages/root/RootPage.tsx";
 
 createRoot(document.getElementById('root')!).render(
@@ -18,8 +17,7 @@ createRoot(document.getElementById('root')!).render(
                 createBrowserRouter(
                     createRoutesFromElements(
                         <Route path="/frontend" element={<RootPage/>}>
-                            <Route index element={<MainPage/>}/>
-                            <Route path="login" element={<LoginPage/>}/>
+                            <Route index element={<LoginPage/>}/>
                         </Route>
                     )
                 )
