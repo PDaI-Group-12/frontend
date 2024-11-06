@@ -1,12 +1,6 @@
 import {Avatar, Box, List, ListItem, ListItemAvatar, ListItemText, Typography} from "@mui/material";
+import {Employee} from "./types.ts";
 
-
-type Employee = {
-    id: number,
-    fname: string,
-    lname: string,
-    iban: string
-}
 
 export function EmployeesPage() {
     const sampleEmployees:Employee[] = [
