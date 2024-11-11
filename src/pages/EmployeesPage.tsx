@@ -8,13 +8,14 @@ import {
     Typography
 } from "@mui/material";
 import {Employee} from "./types.ts";
+import {toPascalCase} from "../util/text.ts";
 
 
 export function EmployeesPage() {
     const sampleEmployees: Employee[] = [
-        {id: 1, fname: "John", lname: "Doe", iban: "FI 1234 123 12"},
-        {id: 2, fname: "Mary", lname: "Poppins", iban: "FI 4321 321 21"},
-        {id: 3, fname: "Harry", lname: "Potter", iban: "FI 3456 456 56"}
+        {id: 1, fname: "John", lname: "Doe", iban: "FI 1234 123 12",role: "worker"},
+        {id: 2, fname: "Mary", lname: "Poppins", iban: "FI 4321 321 21",role: "worker"},
+        {id: 3, fname: "Harry", lname: "Potter", iban: "FI 3456 456 56",role: "employer"}
     ];
     return (
         <Container maxWidth="xs" style={{justifyContent: "center", width: "max-content"}}>
@@ -28,7 +29,7 @@ export function EmployeesPage() {
                                     <Avatar>{employee.fname[0]}{employee.lname[0]}</Avatar>
                                     <Stack>
                                         <Typography>{employee.fname} {employee.lname}</Typography>
-                                        <Typography color="darkgray">IBAN: {employee.iban}</Typography>
+                                        <Typography color="darkgrey" variant="subtitle2"> {toPascalCase(employee.role)} </Typography>
                                     </Stack>
                                 </Stack>
                             </CardContent>
