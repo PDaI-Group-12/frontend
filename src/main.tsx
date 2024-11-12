@@ -1,6 +1,5 @@
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
-import {AuthProvider} from "./hooks/useAuth.tsx";
 import {
     createBrowserRouter,
     createRoutesFromElements,
@@ -10,7 +9,8 @@ import {
 import {LoginPage} from "./pages/LoginPage.tsx";
 import RootPage from "./pages/RootPage.tsx";
 import {EmployeesPage} from "./pages/EmployeesPage.tsx";
-import {ThemeSwitchProvider} from "./hooks/useThemeSwitch.tsx";
+import {AuthProvider} from "./hooks/providers/AuthProvider.tsx";
+import {ThemeSwitchProvider} from "./hooks/providers/ThemeSwitchProvider.tsx";
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
