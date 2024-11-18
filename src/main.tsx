@@ -11,6 +11,7 @@ import {LoginPage} from "./pages/LoginPage.tsx";
 import RootPage from "./pages/RootPage.tsx";
 import {EmployeesPage} from "./pages/EmployeesPage.tsx";
 import {EditUserPage} from "./pages/EditUserPage.tsx";
+import {SaveHoursPage} from "./pages/SaveHoursPage.tsx";
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
@@ -22,6 +23,7 @@ createRoot(document.getElementById('root')!).render(
                             <Route index element={<LoginPage/>}/>
                             <Route path="employees" element={<EmployeesPage/>}/>
                             <Route path="profile" element={<EditUserPage/>}/>
+                            <Route path="save-hours" element={<SaveHoursPage/>}/>
                         </Route>
                     )
                 )
