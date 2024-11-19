@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import {DarkMode, LightMode, Menu} from "@mui/icons-material";
 import {useState} from "react";
-import {useThemeSwitch} from "../hooks/useThemeSwitch.tsx";
+import {useThemeSwitch} from "../hooks/useThemeSwitch.ts";
 
 const drawerWidth = 240;
 
