@@ -11,20 +11,22 @@ import {
     ListItemButton,
     ListItemIcon,
     Toolbar,
-    Typography
+    Typography, useTheme
 } from "@mui/material";
 import {DarkMode, LightMode, Menu} from "@mui/icons-material";
 import {useState} from "react";
+import {useThemeSwitch} from "../hooks/useThemeSwitch.tsx";
 
 const drawerWidth = 240;
 
 export default function RootPage() {
 
     const [mobileOpen, setMobileOpen] = useState(false)
-    const [dummyTheme, setDummyTheme] = useState(false)
+
+    const {toggleColorMode} = useThemeSwitch()
+    const theme = useTheme()
 
     const handleDrawerToggle = () => setMobileOpen((prevState) => !prevState);
-    const switchTheme = () => setDummyTheme((prevState) => !prevState)
 
     return (
         <Box sx={{display: 'flex'}}>
@@ -51,10 +53,10 @@ export default function RootPage() {
                         <IconButton
                             size="large"
                             name="Theme"
-                            onClick={switchTheme}
+                            onClick={toggleColorMode}
                             color="inherit"
                         >
-                            {dummyTheme ? <LightMode/> : <DarkMode/>}
+                            {theme.palette.mode === "light" ? <LightMode/> : <DarkMode/>}
                         </IconButton>
                     </Box>
                 </Toolbar>
@@ -80,9 +82,9 @@ export default function RootPage() {
                         <Divider/>
                         <List>
                             <ListItem key="Theme" disablePadding>
-                                <ListItemButton sx={{textAlign: 'center'}} onClick={switchTheme}>
+                                <ListItemButton sx={{textAlign: 'center'}} onClick={toggleColorMode}>
                                     <ListItemIcon>
-                                        Theme: {dummyTheme ? "Light" : "Dark"}
+                                        Theme: {theme.palette.mode === "light" ? "Light" : "Dark"}
                                     </ListItemIcon>
                                 </ListItemButton>
                             </ListItem>

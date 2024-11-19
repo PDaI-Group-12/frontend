@@ -13,3 +13,11 @@ export interface DefaultProvidersProps {
 export interface AuthProviderProps extends DefaultProvidersProps {
     userToken: string
 }
+
+export interface ColorModeContent {
+    toggleColorMode: () => void
+}
+
+export interface ThemeSwitchProviderProps {
+    children: ReactNode
+}

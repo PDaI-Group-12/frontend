@@ -1,6 +1,7 @@
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
 import {AuthProvider} from "./hooks/useAuth.tsx";
+import {ThemeSwitchProvider} from "./hooks/useThemeSwitch.tsx";
 import {
     createBrowserRouter,
     createRoutesFromElements,
@@ -15,19 +16,21 @@ import {SaveHoursPage} from "./pages/SaveHoursPage.tsx";
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <AuthProvider userToken={localStorage.getItem("token") || ""}>
-            <RouterProvider router={
-                createBrowserRouter(
-                    createRoutesFromElements(
-                        <Route path="/frontend" element={<RootPage/>}>
-                            <Route index element={<LoginPage/>}/>
-                            <Route path="employees" element={<EmployeesPage/>}/>
-                            <Route path="profile" element={<EditUserPage/>}/>
-                            <Route path="save-hours" element={<SaveHoursPage/>}/>
-                        </Route>
+        <ThemeSwitchProvider>
+            <AuthProvider userToken={localStorage.getItem("token") || ""}>
+                <RouterProvider router={
+                    createBrowserRouter(
+                        createRoutesFromElements(
+                            <Route path="/frontend" element={<RootPage/>}>
+                                <Route index element={<LoginPage/>}/>
+                                <Route path="employees" element={<EmployeesPage/>}/>
+                                <Route path="profile" element={<EditUserPage/>}/>
+                                <Route path="save-hours" element={<SaveHoursPage/>}/>
+                            </Route>
+                        )
                     )
-                )
-            }/>
-        </AuthProvider>
+                }/>
+            </AuthProvider>
+        </ThemeSwitchProvider>
     </StrictMode>
 )
