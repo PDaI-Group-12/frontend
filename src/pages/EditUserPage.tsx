@@ -4,6 +4,7 @@ import {Edit, Save} from "@mui/icons-material";
 import {FormEvent, useState} from "react";
 import MultilineTypography from "../components/MultilineTypography.tsx";
 import {isFirstNameInvalid, isIBANInvalid, isLastNameInvalid, isPasswordInvalid} from "../util/validator.ts";
+import {useLabel} from "../hooks/useLabel.ts";
 
 export function EditUserPage() {
 
@@ -20,6 +21,8 @@ export function EditUserPage() {
     const [password, setPassword] = useState("")
     const [iban, setIBAN] = useState(exampleEmployee.iban)
     const [isEdit, setIsEdit] = useState(false);
+
+    useLabel().setLabel("User edit")
 
     return (
         <Container maxWidth="xs">

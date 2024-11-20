@@ -9,13 +9,15 @@ import {
     TextField,
     Typography
 } from "@mui/material";
+import {useLabel} from "../hooks/useLabel.ts";
 
 export function LoginPage() {
 
     const {isAuthorized} = useAuth()
     const navigate = useNavigate()
+    useLabel().setLabel("Login")
 
-    if (isAuthorized) navigate("/home")
+    if (isAuthorized) navigate("profile")
 
     return (
         <Container maxWidth="xs">
@@ -25,13 +27,15 @@ export function LoginPage() {
                     <FormControl fullWidth>
                         <Stack padding={2} spacing={2}>
                             <TextField label="Username" variant="outlined" type="text" required onChange={() => {
-                                // Capture login
+                                //TODO Capture login
                             }}/>
                             <TextField label="Password" variant="outlined" type="password" required onChange={() => {
-                                // Capture password
+                                //TODO Capture password
                             }}/>
-                            <Button type="submit" variant="contained" fullWidth onClick={() => {
-                                // Authorize
+                            <Button type="submit" variant="contained" fullWidth onClick={(event) => {
+                                //TODO Authorize
+                                event.preventDefault()
+                                navigate("profile")
                             }}>Login</Button>
                         </Stack>
                     </FormControl>
