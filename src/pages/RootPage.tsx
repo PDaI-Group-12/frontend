@@ -4,12 +4,11 @@ import {
     Box, Container,
     CssBaseline,
     Divider,
-    Drawer,
+    Drawer, FormControlLabel,
     IconButton,
     List,
     ListItem,
-    ListItemButton,
-    ListItemIcon,
+    Switch,
     Toolbar,
     Typography, useTheme
 } from "@mui/material";
@@ -75,18 +74,22 @@ export default function RootPage() {
                         '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
                     }}
                 >
-                    <Box onClick={handleDrawerToggle} sx={{textAlign: 'center'}}>
+                    <Box sx={{textAlign: 'center'}}>
                         <Typography variant="h6" sx={{my: 2}}>
                             PDaI 12
                         </Typography>
                         <Divider/>
                         <List>
-                            <ListItem key="Theme" disablePadding>
-                                <ListItemButton sx={{textAlign: 'center'}} onClick={toggleColorMode}>
-                                    <ListItemIcon>
-                                        Theme: {theme.palette.mode === "light" ? "Light" : "Dark"}
-                                    </ListItemIcon>
-                                </ListItemButton>
+                            <ListItem key="Theme Switch" disablePadding>
+                                <FormControlLabel sx={{
+                                    marginY: 0,
+                                    marginLeft: 2,
+                                    marginRight: 1,
+                                    width: "100%",
+                                    justifyContent: "space-between"
+                                }} control={
+                                    <Switch checked={theme.palette.mode !== "light"} onChange={toggleColorMode} />
+                                } label="Night Mode" labelPlacement="start"/>
                             </ListItem>
                         </List>
                     </Box>
