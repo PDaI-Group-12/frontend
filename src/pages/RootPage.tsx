@@ -15,6 +15,7 @@ import {
 import {DarkMode, LightMode, Menu} from "@mui/icons-material";
 import {useState} from "react";
 import {useThemeSwitch} from "../hooks/useThemeSwitch.ts";
+import {useLabel} from "../hooks/useLabel.ts";
 
 const drawerWidth = 240;
 
@@ -24,6 +25,8 @@ export default function RootPage() {
 
     const {toggleColorMode} = useThemeSwitch()
     const theme = useTheme()
+
+    const {label} = useLabel()
 
     const handleDrawerToggle = () => setMobileOpen((prevState) => !prevState);
 
@@ -41,6 +44,7 @@ export default function RootPage() {
                     >
                         <Menu/>
                     </IconButton>
+                    <Typography sx={{mr: 2, display: {sm: 'none'}}} variant="h6">{label}</Typography>
                     <Typography
                         variant="h6"
                         component="div"

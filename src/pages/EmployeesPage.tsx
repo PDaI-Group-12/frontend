@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import {Employee} from "./types.ts";
 import {toPascalCase} from "../util/text.ts";
-
+import {useLabel} from "../hooks/useLabel.ts";
 
 export function EmployeesPage() {
     const sampleEmployees: Employee[] = [
@@ -17,6 +17,9 @@ export function EmployeesPage() {
         {id: 2, fname: "Mary", lname: "Poppins", iban: "FI 4321 321 21",role: "worker"},
         {id: 3, fname: "Harry", lname: "Potter", iban: "FI 3456 456 56",role: "employer"}
     ];
+
+    useLabel().setLabel("Employees")
+
     return (
         <Container maxWidth="xs" style={{justifyContent: "center", width: "max-content"}}>
             <Typography variant="h4" align="center" paddingBottom={2}>Employees</Typography>

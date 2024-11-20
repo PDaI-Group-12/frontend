@@ -1,10 +1,10 @@
-import {ThemeSwitchProviderProps} from "../types.ts";
+import {DefaultProvidersProps} from "../types.ts";
 import {createTheme, PaletteMode} from "@mui/material";
 import {useMemo, useState} from "react";
 import {ThemeProvider} from "@emotion/react";
 import {ColorModeContext} from "../useThemeSwitch.ts";
 
-export const ThemeSwitchProvider = (props: ThemeSwitchProviderProps) => {
+export const ThemeSwitchProvider = (props: DefaultProvidersProps) => {
     const storedTheme = localStorage.getItem("theme") as PaletteMode;
     const [mode, setMode] = useState<PaletteMode>(storedTheme || "light");
 

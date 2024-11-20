@@ -11,10 +11,13 @@ import {
     Typography
 } from "@mui/material";
 import {useState} from "react";
+import {useLabel} from "../hooks/useLabel.ts";
 
 export function SaveHoursPage() {
     const [hours, setHours] = useState("")
     const [type, setType] = useState("")
+
+    useLabel().setLabel("Save hours")
 
     const handleHoursChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setHours(event.target.value)
