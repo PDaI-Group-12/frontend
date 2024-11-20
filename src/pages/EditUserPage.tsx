@@ -3,6 +3,7 @@ import {Employee} from "./types.ts";
 import {Edit, Save} from "@mui/icons-material";
 import {FormEvent, useState} from "react";
 import MultilineTypography from "../components/MultilineTypography.tsx";
+import {isFirstNameInvalid, isIBANInvalid, isLastNameInvalid, isPasswordInvalid} from "../util/validator.ts";
 
 export function EditUserPage() {
 
@@ -20,25 +21,6 @@ export function EditUserPage() {
     const [iban, setIBAN] = useState(exampleEmployee.iban)
     const [isEdit, setIsEdit] = useState(false);
 
-    //TODO Later extract checks to other file to share them between login, edit and else
-
-    const isPasswordInvalid = (): boolean => {
-        //TODO Replace it with regex later after meeting with a team
-        return !(password.length > 0)
-    }
-
-    const isFirstNameInvalid = (): boolean => {
-        //TODO Replace it with regex later after meeting with a team
-        return !(firstName.length > 0)
-    }
-
-    const isLastNameInvalid = (): boolean => {
-        //TODO Replace it with regex later after meeting with a team
-        return !(lastName.length > 0)
-    }
-
-    const isIBANInvalid = (): boolean => !/^[A-Z]{2}\d{2}[A-Z0-9]{1,30}$/.test(iban.replace(/\s+/g, ''));
-
     return (
         <Container maxWidth="xs">
             <Typography variant="h4" textAlign="center" paddingBottom={2}>Profile</Typography>
@@ -46,7 +28,11 @@ export function EditUserPage() {
                 <form onSubmit={(event: FormEvent) => {
                     event.preventDefault()
 
-                    if (isFirstNameInvalid() || isLastNameInvalid() || isPasswordInvalid() || isIBANInvalid()) return
+                    if (isFirstNameInvalid(firstName)
+                        || isLastNameInvalid(lastName)
+                        || isPasswordInvalid(password)
+                        || isIBANInvalid(iban)
+                    ) return
 
                     setIsEdit(false)
                     setPassword("") //TODO Remove later while add integration with backend
@@ -59,7 +45,7 @@ export function EditUserPage() {
                                         label="First Name"
                                         //TODO Remove if backend uses PATCH, else left unchanged
                                         required
-                                        error={isFirstNameInvalid()}
+                                        error={isFirstNameInvalid(firstName)}
                                         placeholder={exampleEmployee.fname}
                                         variant="standard"
                                         type="text"
@@ -70,7 +56,7 @@ export function EditUserPage() {
                                         label="Last Name"
                                         //TODO Remove if backend uses PATCH, else left unchanged
                                         required
-                                        error={isLastNameInvalid()}
+                                        error={isLastNameInvalid(lastName)}
                                         placeholder={exampleEmployee.lname}
                                         variant="standard"
                                         type="text"
@@ -81,7 +67,7 @@ export function EditUserPage() {
                                         label="Password"
                                         //TODO Remove if backend uses PATCH, else left unchanged
                                         required
-                                        error={isPasswordInvalid()}
+                                        error={isPasswordInvalid(password)}
                                         placeholder="Dont use qwerty"
                                         variant="standard"
                                         type="password"
@@ -92,7 +78,7 @@ export function EditUserPage() {
                                         label="IBAN"
                                         //TODO Remove if backend uses PATCH, else left unchanged
                                         required
-                                        error={isIBANInvalid()}
+                                        error={isIBANInvalid(iban)}
                                         placeholder={exampleEmployee.iban}
                                         variant="standard"
                                         type="text"
