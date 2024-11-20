@@ -1,7 +1,8 @@
 import {Card, Container, Fab, FormControl, Stack, TextField, Typography} from "@mui/material";
 import {Employee} from "./types.ts";
 import {Edit, Save} from "@mui/icons-material";
-import {CSSProperties, FormEvent, useState} from "react";
+import {FormEvent, useState} from "react";
+import MultilineTypography from "../components/MultilineTypography.tsx";
 
 export function EditUserPage() {
 
@@ -18,11 +19,6 @@ export function EditUserPage() {
     const [password, setPassword] = useState("")
     const [iban, setIBAN] = useState(exampleEmployee.iban)
     const [isEdit, setIsEdit] = useState(false);
-
-    // TODO Extract with typography into custom component
-    const worldBreaker: CSSProperties = {
-        wordBreak: "break-word"
-    }
 
     //TODO Later extract checks to other file to share them between login, edit and else
 
@@ -104,10 +100,10 @@ export function EditUserPage() {
                                         onChange={event => setIBAN(event.target.value.trim())}
                                     />
                                 </> : <>
-                                    <Typography style={worldBreaker}><b>First Name:</b> {firstName}</Typography>
-                                    <Typography style={worldBreaker}><b>Last Name:</b> {lastName}</Typography>
-                                    <Typography style={worldBreaker}><b>Password:</b> *********</Typography>
-                                    <Typography style={worldBreaker}><b>IBAN:</b> {iban}</Typography>
+                                    <MultilineTypography><b>First Name:</b> {firstName}</MultilineTypography>
+                                    <MultilineTypography><b>Last Name:</b> {lastName}</MultilineTypography>
+                                    <MultilineTypography><b>Password:</b> *********</MultilineTypography>
+                                    <MultilineTypography><b>IBAN:</b> {iban}</MultilineTypography>
                                 </>
                             }
                         </Stack>
