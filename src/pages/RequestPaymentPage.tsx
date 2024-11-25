@@ -23,9 +23,9 @@ export function RequestPaymentPage() {
                 <CardContent>
                     <Stack spacing={2} alignItems="center">
                         <Avatar>MM</Avatar>
-                        <Typography>Matti Meikäläinen</Typography>
+                        <Typography variant="h6">Matti Meikäläinen</Typography>
                         <Typography variant="subtitle2" color="darkgrey">FI 1234 1234 12</Typography>
-                        <Typography>2000€</Typography>
+                        <Typography color="gray" fontWeight="bold" variant="subtitle2">2000€</Typography>
                         <FormControlLabel control={<Checkbox
                             checked={isChecked}
                             onChange={() => setIsChecked(prevState => !prevState)}
