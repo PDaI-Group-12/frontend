@@ -15,7 +15,7 @@ export default function RequestedPaymentsPage() {
                             <Stack direction="row" spacing={2} alignItems="center">
                                 <Avatar>JH</Avatar>
                                 <Stack>
-                                    <Typography>John Smith</Typography>
+                                    <Typography variant="h6">John Smith</Typography>
                                     <Typography color="darkgrey" variant="subtitle2">FI12 3456 7890 ABCD EF</Typography>
                                     <Typography color="gray" fontWeight="bold" variant="subtitle2" align="right">2000
                                         $</Typography>
@@ -30,7 +30,7 @@ export default function RequestedPaymentsPage() {
                             <Stack direction="row" spacing={2} alignItems="center">
                                 <Avatar>JH</Avatar>
                                 <Stack>
-                                    <Typography>John Smith</Typography>
+                                    <Typography variant="h6">John Smith</Typography>
                                     <Typography color="darkgrey" variant="subtitle2">FI12 3456 7890 ABCD EF</Typography>
                                     <Typography color="gray" fontWeight="bold" variant="subtitle2" align="right">2000
                                         $</Typography>
@@ -45,7 +45,7 @@ export default function RequestedPaymentsPage() {
                             <Stack direction="row" spacing={2} alignItems="center">
                                 <Avatar>JH</Avatar>
                                 <Stack>
-                                    <Typography>John Smith</Typography>
+                                    <Typography variant="h6">John Smith</Typography>
                                     <Typography color="darkgrey" variant="subtitle2">FI12 3456 7890 ABCD EF</Typography>
                                     <Typography color="gray" fontWeight="bold" variant="subtitle2" align="right">2000
                                         $</Typography>

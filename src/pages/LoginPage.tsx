@@ -2,7 +2,6 @@ import {useAuth} from "../hooks/useAuth.ts";
 import {useNavigate} from "react-router-dom";
 import {
     Button,
-    Card,
     Container,
     FormControl,
     Stack,
@@ -22,7 +21,6 @@ export function LoginPage() {
     return (
         <Container maxWidth="xs">
             <Typography variant="h4" align="center" paddingBottom={2}>Log In</Typography>
-            <Card>
                 <form>
                     <FormControl fullWidth>
                         <Stack padding={2} spacing={2}>
@@ -40,7 +38,6 @@ export function LoginPage() {
                         </Stack>
                     </FormControl>
                 </form>
-            </Card>
         </Container>
     )
 }

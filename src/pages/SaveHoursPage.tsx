@@ -31,7 +31,7 @@ export function SaveHoursPage() {
 
     return (
         <Container maxWidth="xs">
-            <Typography variant="h5" textAlign="center">Add hours</Typography>
+            <Typography variant="h4" textAlign="center">Add hours</Typography>
             <form>
                 <Stack padding={2} spacing={2}>
                     <TextField
