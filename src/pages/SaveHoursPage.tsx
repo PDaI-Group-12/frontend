@@ -10,7 +10,7 @@ import {
     TextField,
     Typography
 } from "@mui/material";
-import {useState} from "react";
+import {ChangeEvent, useState} from "react";
 import {useLabel} from "../hooks/useLabel.ts";
 
 export function SaveHoursPage() {
@@ -19,7 +19,7 @@ export function SaveHoursPage() {
 
     useLabel().setLabel("Save hours")
 
-    const handleHoursChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleHoursChange = (event:ChangeEvent<HTMLInputElement>) => {
         setHours(event.target.value)
     }
 
