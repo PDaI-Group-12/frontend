@@ -16,6 +16,7 @@ import {SaveHoursPage} from "./pages/SaveHoursPage.tsx";
 import {AuthProvider} from "./hooks/providers/AuthProvider.tsx";
 import {ThemeSwitchProvider} from "./hooks/providers/ThemeSwitchProvider.tsx";
 import {LabelProvider} from "./hooks/providers/LabelProvider.tsx";
+import {PaymentHistoryPage} from "./pages/PaymentHistoryPage.tsx";
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
@@ -30,6 +31,7 @@ createRoot(document.getElementById('root')!).render(
                                     <Route path="employees" element={<EmployeesPage/>}/>
                                     <Route path="profile" element={<EditUserPage/>}/>
                                     <Route path="save-hours" element={<SaveHoursPage/>}/>
+                                    <Route path="payment-history" element={<PaymentHistoryPage/>} />
                                 </Route>
                             )
                         )
