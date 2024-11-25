@@ -1,18 +1,46 @@
-import {useAuth} from "../hooks/useAuth.tsx";
+import {useAuth} from "../hooks/useAuth.ts";
 import {useNavigate} from "react-router-dom";
-import {TextField, Typography} from "@mui/material";
+import {
+    Button,
+    Card,
+    Container,
+    FormControl,
+    Stack,
+    TextField,
+    Typography
+} from "@mui/material";
+import {useLabel} from "../hooks/useLabel.ts";
 
 export function LoginPage() {
 
     const {isAuthorized} = useAuth()
     const navigate = useNavigate()
+    useLabel().setLabel("Login")
 
-    if (isAuthorized) navigate("/home")
+    if (isAuthorized) navigate("profile")
 
     return (
-        <>
-            <Typography variant="h2">PDaI</Typography>
-            <TextField label="Login" type="text"/>
-        </>
+        <Container maxWidth="xs">
+            <Typography variant="h4" align="center" paddingBottom={2}>Log In</Typography>
+            <Card>
+                <form>
+                    <FormControl fullWidth>
+                        <Stack padding={2} spacing={2}>
+                            <TextField label="Username" variant="outlined" type="text" required onChange={() => {
+                                //TODO Capture login
+                            }}/>
+                            <TextField label="Password" variant="outlined" type="password" required onChange={() => {
+                                //TODO Capture password
+                            }}/>
+                            <Button type="submit" variant="contained" fullWidth onClick={(event) => {
+                                //TODO Authorize
+                                event.preventDefault()
+                                navigate("profile")
+                            }}>Login</Button>
+                        </Stack>
+                    </FormControl>
+                </form>
+            </Card>
+        </Container>
     )
 }
