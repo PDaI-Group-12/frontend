@@ -3,8 +3,19 @@ import {stringToColor} from "../util/text.ts";
 import {AutoColoredAvatarProps} from "./types.ts";
 
 export function AutoColoredAvatar(props: AutoColoredAvatarProps) {
-    return <Avatar sx={{
-        bgcolor: stringToColor(props.text),
-        children: `${props.text.split(' ')[0][0]}${props.text.split(' ')[1][0]}`
-    }} />
+    const text = props.text.trim()
+    const words = text.split(' ')
+    const initials = words.length > 1 ? `${words[0][0]}${words[1][0]}`.toUpperCase() : text.slice(0, 2).toUpperCase();
+
+    return (
+        <Avatar
+            sx={{
+                width: 48,
+                height: 48,
+                bgcolor: stringToColor(text),
+            }}
+        >
+            {initials}
+        </Avatar>
+    );
 }
