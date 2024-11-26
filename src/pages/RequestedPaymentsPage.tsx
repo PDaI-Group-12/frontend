@@ -1,5 +1,6 @@
-import {Avatar, Card, CardActionArea, CardContent, Container, Stack, Typography} from "@mui/material";
+import {Card, CardActionArea, CardContent, Container, Stack, Typography} from "@mui/material";
 import {useLabel} from "../hooks/useLabel.ts";
+import {AutoColoredAvatar} from "../components/AutoColoredAvatar.tsx";
 
 export default function RequestedPaymentsPage() {
 
@@ -13,7 +14,7 @@ export default function RequestedPaymentsPage() {
                     <CardActionArea>
                         <CardContent>
                             <Stack direction="row" spacing={2} alignItems="center">
-                                <Avatar>JH</Avatar>
+                                <AutoColoredAvatar text="JH"/>
                                 <Stack>
                                     <Typography variant="h6">John Smith</Typography>
                                     <Typography color="darkgrey" variant="subtitle2">FI12 3456 7890 ABCD EF</Typography>
@@ -28,7 +29,7 @@ export default function RequestedPaymentsPage() {
                     <CardActionArea>
                         <CardContent>
                             <Stack direction="row" spacing={2} alignItems="center">
-                                <Avatar>JH</Avatar>
+                                <AutoColoredAvatar text="JH"/>
                                 <Stack>
                                     <Typography variant="h6">John Smith</Typography>
                                     <Typography color="darkgrey" variant="subtitle2">FI12 3456 7890 ABCD EF</Typography>
@@ -43,7 +44,7 @@ export default function RequestedPaymentsPage() {
                     <CardActionArea>
                         <CardContent>
                             <Stack direction="row" spacing={2} alignItems="center">
-                                <Avatar>JH</Avatar>
+                                <AutoColoredAvatar text="JH"/>
                                 <Stack>
                                     <Typography variant="h6">John Smith</Typography>
                                     <Typography color="darkgrey" variant="subtitle2">FI12 3456 7890 ABCD EF</Typography>
