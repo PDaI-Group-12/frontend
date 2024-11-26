@@ -1,4 +1,5 @@
-import {Avatar, Card, CardContent, Container, Stack, Typography} from "@mui/material";
+import {Card, CardContent, Container, Stack, Typography} from "@mui/material";
+import {AutoColoredAvatar} from "../components/AutoColoredAvatar.tsx";
 
 
 export function PaymentHistoryPage() {
@@ -11,7 +12,7 @@ export function PaymentHistoryPage() {
                 <Card>
                     <CardContent>
                         <Stack spacing={2} direction="row" justifyContent="space-between" alignItems="center">
-                            <Avatar>MM</Avatar>
+                            <AutoColoredAvatar text="MM"/>
                             <Typography variant="h6">Matti Meikäläinen</Typography>
                             <Stack alignItems="end">
                                 <Typography variant="h6">16.06.2020</Typography>
@@ -23,7 +24,7 @@ export function PaymentHistoryPage() {
                 <Card>
                     <CardContent>
                         <Stack spacing={2} direction="row" justifyContent="space-between" alignItems="center">
-                            <Avatar>MM</Avatar>
+                            <AutoColoredAvatar text="MM"/>
                             <Typography variant="h6">Matti Meikäläinen</Typography>
                             <Stack alignItems="end">
                                 <Typography variant="h6">16.06.2020</Typography>
@@ -35,7 +36,7 @@ export function PaymentHistoryPage() {
                 <Card>
                     <CardContent>
                         <Stack spacing={2} direction="row" justifyContent="space-between" alignItems="center">
-                            <Avatar>MM</Avatar>
+                            <AutoColoredAvatar text="MM"/>
                             <Typography variant="h6">Matti Meikäläinen</Typography>
                             <Stack alignItems="end">
                                 <Typography variant="h6">16.06.2020</Typography>
@@ -47,7 +48,7 @@ export function PaymentHistoryPage() {
                 <Card>
                     <CardContent>
                         <Stack spacing={2} direction="row" justifyContent="space-between" alignItems="center">
-                            <Avatar>MM</Avatar>
+                            <AutoColoredAvatar text="MM"/>
                             <Typography variant="h6">Matti Meikäläinen</Typography>
                             <Stack alignItems="end">
                                 <Typography variant="h6">16.06.2020</Typography>

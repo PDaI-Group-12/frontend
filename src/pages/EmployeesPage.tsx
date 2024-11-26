@@ -1,5 +1,4 @@
 import {
-    Avatar,
     Card,
     CardActionArea,
     CardContent,
@@ -10,6 +9,7 @@ import {
 import {Employee} from "./types.ts";
 import {toPascalCase} from "../util/text.ts";
 import {useLabel} from "../hooks/useLabel.ts";
+import {AutoColoredAvatar} from "../components/AutoColoredAvatar.tsx";
 
 export function EmployeesPage() {
     const sampleEmployees: Employee[] = [
@@ -29,7 +29,7 @@ export function EmployeesPage() {
                         <CardActionArea>
                             <CardContent>
                                 <Stack direction="row" spacing={2} alignItems="center">
-                                    <Avatar>{employee.fname[0]}{employee.lname[0]}</Avatar>
+                                    <AutoColoredAvatar text={`${employee.fname[0]}${employee.lname[0]}`}/>
                                     <Stack>
                                         <Typography variant="h6">{employee.fname} {employee.lname}</Typography>
                                         <Typography color="darkgrey" variant="subtitle2"> {toPascalCase(employee.role)} </Typography>

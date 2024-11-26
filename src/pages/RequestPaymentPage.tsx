@@ -1,5 +1,4 @@
 import {
-    Avatar,
     Button,
     Card,
     CardContent,
@@ -10,6 +9,7 @@ import {
     Typography
 } from "@mui/material";
 import {useState} from "react";
+import {AutoColoredAvatar} from "../components/AutoColoredAvatar.tsx";
 
 
 export function RequestPaymentPage() {
@@ -22,7 +22,7 @@ export function RequestPaymentPage() {
             <Card>
                 <CardContent>
                     <Stack spacing={2} alignItems="center">
-                        <Avatar>MM</Avatar>
+                        <AutoColoredAvatar text="MM"/>
                         <Typography variant="h6">Matti Meikäläinen</Typography>
                         <Typography variant="subtitle2" color="darkgrey">FI 1234 1234 12</Typography>
                         <Typography color="gray" fontWeight="bold" variant="subtitle2">2000€</Typography>
