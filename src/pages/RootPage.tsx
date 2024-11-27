@@ -1,25 +1,26 @@
 import {Outlet} from "react-router-dom";
 import {
     AppBar,
-    Box, Container,
+    Box,
+    Container,
     CssBaseline,
     Divider,
-    Drawer, FormControlLabel,
+    Drawer,
+    FormControlLabel,
     IconButton,
     List,
     ListItem,
     Switch,
     Toolbar,
-    Typography, useTheme
+    Typography,
+    useTheme
 } from "@mui/material";
 import {DarkMode, LightMode, Menu} from "@mui/icons-material";
 import {useState} from "react";
 import {useThemeSwitch} from "../hooks/useThemeSwitch.ts";
 import {useLabel} from "../hooks/useLabel.ts";
 
-const drawerWidth = 240;
-
-export default function RootPage() {
+export function RootPage() {
 
     const [mobileOpen, setMobileOpen] = useState(false)
 
@@ -31,7 +32,7 @@ export default function RootPage() {
     const handleDrawerToggle = () => setMobileOpen((prevState) => !prevState);
 
     return (
-        <Box sx={{display: 'flex'}}>
+        <Box sx={{display: "flex"}}>
             <CssBaseline/>
             <AppBar component="nav">
                 <Toolbar>
@@ -40,19 +41,19 @@ export default function RootPage() {
                         aria-label="open drawer"
                         edge="start"
                         onClick={handleDrawerToggle}
-                        sx={{mr: 2, display: {sm: 'none'}}}
+                        sx={{mr: 2, display: {sm: "none"}}}
                     >
                         <Menu/>
                     </IconButton>
-                    <Typography sx={{mr: 2, display: {sm: 'none'}}} variant="h6">{label}</Typography>
+                    <Typography sx={{mr: 2, display: {sm: "none"}}} variant="h6">{label}</Typography>
                     <Typography
                         variant="h6"
                         component="div"
-                        sx={{flexGrow: 1, display: {xs: 'none', sm: 'block'}}}
+                        sx={{flexGrow: 1, display: {xs: "none", sm: "block"}}}
                     >
                         PDaI 12
                     </Typography>
-                    <Box sx={{display: {xs: 'none', sm: 'block'}}}>
+                    <Box sx={{display: {xs: "none", sm: "block"}}}>
                         <IconButton
                             size="large"
                             name="Theme"
@@ -74,14 +75,12 @@ export default function RootPage() {
                         keepMounted: true
                     }}
                     sx={{
-                        display: {xs: 'block', sm: 'none'},
-                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
+                        display: {xs: "block", sm: "none"},
+                        "& .MuiDrawer-paper": {boxSizing: "border-box", width: 240},
                     }}
                 >
-                    <Box sx={{textAlign: 'center'}}>
-                        <Typography variant="h6" sx={{my: 2}}>
-                            PDaI 12
-                        </Typography>
+                    <Box sx={{textAlign: "center"}}>
+                        <Typography variant="h6" sx={{my: 2}}>PDaI 12</Typography>
                         <Divider/>
                         <List>
                             <ListItem key="Theme Switch" disablePadding>
@@ -91,8 +90,8 @@ export default function RootPage() {
                                     marginRight: 1,
                                     width: "100%",
                                     justifyContent: "space-between"
-                                }} control={
-                                    <Switch checked={theme.palette.mode !== "light"} onChange={toggleColorMode} />
+                                }} control={<Switch checked={theme.palette.mode !== "light"}
+                                                    onChange={toggleColorMode}/>
                                 } label="Night Mode" labelPlacement="start"/>
                             </ListItem>
                         </List>
@@ -101,7 +100,9 @@ export default function RootPage() {
             </nav>
             <Box component="main" sx={{flexGrow: 1, p: 3}}>
                 <Toolbar/>
-                <Container maxWidth="xl">
+                <Typography sx={{display: {xs: "none", sm: "block"}}} variant="h4" align="center"
+                            paddingBottom={2}>{label}</Typography>
+                <Container maxWidth="xs">
                     <Outlet/>
                 </Container>
             </Box>
