@@ -15,30 +15,33 @@ import {PaymentHistoryPage} from "./pages/PaymentHistoryPage.tsx";
 import {RequestPaymentPage} from "./pages/RequestPaymentPage.tsx";
 import RequestedPaymentsPage from "./pages/RequestedPaymentsPage.tsx";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {SnackbarProvider} from "notistack";
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <LabelProvider>
             <ThemeSwitchProvider>
-                <QueryClientProvider client={new QueryClient()}>
-                <AuthProvider userToken={localStorage.getItem("token") || ""}>
-                    <RouterProvider router={
-                        createBrowserRouter(
-                            createRoutesFromElements(
-                                <Route path="/frontend" element={<RootPage/>}>
-                                    <Route index element={<LoginPage/>}/>
-                                    <Route path="employees" element={<EmployeesPage/>}/>
-                                    <Route path="profile" element={<EditUserPage/>}/>
-                                    <Route path="save-hours" element={<SaveHoursPage/>}/>
-                                    <Route path="payment-history" element={<PaymentHistoryPage/>}/>
-                                    <Route path="request-payments" element={<RequestPaymentPage/>}/>
-                                    <Route path="requested-payments" element={<RequestedPaymentsPage/>}/>
-                                </Route>
-                            )
-                        )
-                    }/>
-                </AuthProvider>
-                </QueryClientProvider>
+                <SnackbarProvider>
+                    <QueryClientProvider client={new QueryClient()}>
+                        <AuthProvider userToken={localStorage.getItem("token") || ""}>
+                            <RouterProvider router={
+                                createBrowserRouter(
+                                    createRoutesFromElements(
+                                        <Route path="/frontend" element={<RootPage/>}>
+                                            <Route index element={<LoginPage/>}/>
+                                            <Route path="employees" element={<EmployeesPage/>}/>
+                                            <Route path="profile" element={<EditUserPage/>}/>
+                                            <Route path="save-hours" element={<SaveHoursPage/>}/>
+                                            <Route path="payment-history" element={<PaymentHistoryPage/>}/>
+                                            <Route path="request-payments" element={<RequestPaymentPage/>}/>
+                                            <Route path="requested-payments" element={<RequestedPaymentsPage/>}/>
+                                        </Route>
+                                    )
+                                )
+                            }/>
+                        </AuthProvider>
+                    </QueryClientProvider>
+                </SnackbarProvider>
             </ThemeSwitchProvider>
         </LabelProvider>
     </StrictMode>
