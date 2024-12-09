@@ -3,11 +3,11 @@ import {useCallback, useEffect, useState} from "react";
 import {AuthContext} from "../useAuth.ts";
 
 export const AuthProvider = (props: DefaultProvidersProps) => {
-    const [token, setToken] = useState<string>(localStorage.getItem("userToken") || "");
+    const [token, setToken] = useState<string>(localStorage.getItem("token") || "");
 
     useEffect(() => {
-        if (token) localStorage.setItem("userToken", token);
-        else localStorage.removeItem("userToken");
+        if (token) localStorage.setItem("token", token);
+        else localStorage.removeItem("token");
     }, [token]);
 
     const isAuthorized = !!token;
