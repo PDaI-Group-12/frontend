@@ -9,7 +9,7 @@ import {useSnackbar} from "notistack";
 
 export function LoginPage() {
 
-    const {isAuthorized, setToken} = useAuth()
+    const {isAuthorized, login} = useAuth()
     const {enqueueSnackbar} = useSnackbar();
 
     console.log(isAuthorized)
@@ -52,8 +52,7 @@ export function LoginPage() {
                         }, {
                             onSuccess: (data) => {
                                 enqueueSnackbar("Welcome back", {variant: "success"})
-                                setToken(data.token)
-                                localStorage.setItem("token", data.token)
+                                login(data.token)
                             },
                             onError: () => {
                                 enqueueSnackbar(loginMutation.error?.message ?? "Something went wrong", {variant: "error"})

@@ -23,7 +23,7 @@ createRoot(document.getElementById('root')!).render(
             <ThemeSwitchProvider>
                 <SnackbarProvider>
                     <QueryClientProvider client={new QueryClient()}>
-                        <AuthProvider userToken={localStorage.getItem("token") || ""}>
+                        <AuthProvider>
                             <RouterProvider router={
                                 createBrowserRouter(
                                     createRoutesFromElements(

@@ -1,15 +1,27 @@
-import {AuthProviderProps} from "../types.ts";
-import {useState} from "react";
+import {DefaultProvidersProps} from "../types.ts";
+import {useCallback, useEffect, useState} from "react";
 import {AuthContext} from "../useAuth.ts";
 
-export const AuthProvider = (props: AuthProviderProps) => {
+export const AuthProvider = (props: DefaultProvidersProps) => {
+    const [token, setToken] = useState<string>(localStorage.getItem("userToken") || "");
 
-    const [token, setToken] = useState(props.userToken);
+    useEffect(() => {
+        if (token) localStorage.setItem("userToken", token);
+        else localStorage.removeItem("userToken");
+    }, [token]);
 
-    const isAuthorized = !(!token || token === "");
+    const isAuthorized = !!token;
+
+    const login = useCallback((newToken: string) => setToken(newToken), []);
+    const logout = useCallback(() => setToken(""), []);
+
+    const contextValue = useCallback(
+        () => ({token, isAuthorized, login, logout}),
+        [token, isAuthorized, login, logout]
+    );
 
     return (
-        <AuthContext.Provider value={{token, setToken, isAuthorized}}>
+        <AuthContext.Provider value={contextValue()}>
             {props.children}
         </AuthContext.Provider>
     );
