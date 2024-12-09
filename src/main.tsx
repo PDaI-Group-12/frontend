@@ -14,11 +14,13 @@ import {LabelProvider} from "./hooks/providers/LabelProvider.tsx";
 import {PaymentHistoryPage} from "./pages/PaymentHistoryPage.tsx";
 import {RequestPaymentPage} from "./pages/RequestPaymentPage.tsx";
 import RequestedPaymentsPage from "./pages/RequestedPaymentsPage.tsx";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <LabelProvider>
             <ThemeSwitchProvider>
+                <QueryClientProvider client={new QueryClient()}>
                 <AuthProvider userToken={localStorage.getItem("token") || ""}>
                     <RouterProvider router={
                         createBrowserRouter(
@@ -36,6 +38,7 @@ createRoot(document.getElementById('root')!).render(
                         )
                     }/>
                 </AuthProvider>
+                </QueryClientProvider>
             </ThemeSwitchProvider>
         </LabelProvider>
     </StrictMode>

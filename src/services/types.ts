@@ -1,14 +1,19 @@
 export interface AuthToken {
-    token: string;
+    message: string
+    token: string
 }
 
 export interface ApiMessage {
-    code: number;
-    message: string;
+    code: number
+    message: string
 }
 
 export interface User {
-    id?: number;
-    username: string;
-    password: string;
+    id?: number
+    firstname?: string
+    lastname?: string
+    username?: string
+    password?: string
+    role?: string
+    iban?: string
 }

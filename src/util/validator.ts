@@ -1,3 +1,8 @@
+export const isUsernameInvalid = (username: string): boolean => {
+    //TODO Replace it with regex later after meeting with a team
+    return !(username.length > 0)
+}
+
 export const isPasswordInvalid = (password: string): boolean => {
     //TODO Replace it with regex later after meeting with a team
     return !(password.length > 0)
