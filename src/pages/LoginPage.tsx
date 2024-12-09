@@ -23,7 +23,8 @@ export function LoginPage() {
     useLabel().setLabel("Login")
 
     useEffect(() => {
-        if (isAuthorized) navigate("frontend/profile")
+        // FIXME Fix later incorrect navigation after login or if already log in
+        if (isAuthorized) navigate("profile")
     })
 
     return (
