@@ -1,27 +1,42 @@
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
-import {AuthProvider} from "./hooks/useAuth.tsx";
-import {
-    createBrowserRouter,
-    createRoutesFromElements,
-    Route,
-    RouterProvider,
-} from "react-router-dom";
+import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider,} from "react-router-dom";
+
 import {LoginPage} from "./pages/LoginPage.tsx";
-import RootPage from "./pages/RootPage.tsx";
+import {RootPage} from "./pages/RootPage.tsx";
+import {EmployeesPage} from "./pages/EmployeesPage.tsx";
+import {EditUserPage} from "./pages/EditUserPage.tsx";
+import {SaveHoursPage} from "./pages/SaveHoursPage.tsx";
+
+import {AuthProvider} from "./hooks/providers/AuthProvider.tsx";
+import {ThemeSwitchProvider} from "./hooks/providers/ThemeSwitchProvider.tsx";
+import {LabelProvider} from "./hooks/providers/LabelProvider.tsx";
+import {PaymentHistoryPage} from "./pages/PaymentHistoryPage.tsx";
+import {RequestPaymentPage} from "./pages/RequestPaymentPage.tsx";
+import RequestedPaymentsPage from "./pages/RequestedPaymentsPage.tsx";
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <AuthProvider userToken={localStorage.getItem("token") || ""}>
-            <RouterProvider router={
-                createBrowserRouter(
-                    createRoutesFromElements(
-                        <Route path="/frontend" element={<RootPage/>}>
-                            <Route index element={<LoginPage/>}/>
-                        </Route>
-                    )
-                )
-            }/>
-        </AuthProvider>
+        <LabelProvider>
+            <ThemeSwitchProvider>
+                <AuthProvider userToken={localStorage.getItem("token") || ""}>
+                    <RouterProvider router={
+                        createBrowserRouter(
+                            createRoutesFromElements(
+                                <Route path="/frontend" element={<RootPage/>}>
+                                    <Route index element={<LoginPage/>}/>
+                                    <Route path="employees" element={<EmployeesPage/>}/>
+                                    <Route path="profile" element={<EditUserPage/>}/>
+                                    <Route path="save-hours" element={<SaveHoursPage/>}/>
+                                    <Route path="payment-history" element={<PaymentHistoryPage/>}/>
+                                    <Route path="request-payments" element={<RequestPaymentPage/>}/>
+                                    <Route path="requested-payments" element={<RequestedPaymentsPage/>}/>
+                                </Route>
+                            )
+                        )
+                    }/>
+                </AuthProvider>
+            </ThemeSwitchProvider>
+        </LabelProvider>
     </StrictMode>
 )

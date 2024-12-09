@@ -1,33 +1,38 @@
 import {Outlet} from "react-router-dom";
 import {
     AppBar,
-    Box, Container,
+    Box,
+    Container,
     CssBaseline,
     Divider,
     Drawer,
+    FormControlLabel,
     IconButton,
     List,
     ListItem,
-    ListItemButton,
-    ListItemIcon,
+    Switch,
     Toolbar,
-    Typography
+    Typography,
+    useTheme
 } from "@mui/material";
 import {DarkMode, LightMode, Menu} from "@mui/icons-material";
 import {useState} from "react";
+import {useThemeSwitch} from "../hooks/useThemeSwitch.ts";
+import {useLabel} from "../hooks/useLabel.ts";
 
-const drawerWidth = 240;
-
-export default function RootPage() {
+export function RootPage() {
 
     const [mobileOpen, setMobileOpen] = useState(false)
-    const [dummyTheme, setDummyTheme] = useState(false)
+
+    const {toggleColorMode} = useThemeSwitch()
+    const theme = useTheme()
+
+    const {label} = useLabel()
 
     const handleDrawerToggle = () => setMobileOpen((prevState) => !prevState);
-    const switchTheme = () => setDummyTheme((prevState) => !prevState)
 
     return (
-        <Box sx={{display: 'flex'}}>
+        <Box sx={{display: "flex"}}>
             <CssBaseline/>
             <AppBar component="nav">
                 <Toolbar>
@@ -36,25 +41,26 @@ export default function RootPage() {
                         aria-label="open drawer"
                         edge="start"
                         onClick={handleDrawerToggle}
-                        sx={{mr: 2, display: {sm: 'none'}}}
+                        sx={{mr: 2, display: {sm: "none"}}}
                     >
                         <Menu/>
                     </IconButton>
+                    <Typography sx={{mr: 2, display: {sm: "none"}}} variant="h6">{label}</Typography>
                     <Typography
                         variant="h6"
                         component="div"
-                        sx={{flexGrow: 1, display: {xs: 'none', sm: 'block'}}}
+                        sx={{flexGrow: 1, display: {xs: "none", sm: "block"}}}
                     >
                         PDaI 12
                     </Typography>
-                    <Box sx={{display: {xs: 'none', sm: 'block'}}}>
+                    <Box sx={{display: {xs: "none", sm: "block"}}}>
                         <IconButton
                             size="large"
                             name="Theme"
-                            onClick={switchTheme}
+                            onClick={toggleColorMode}
                             color="inherit"
                         >
-                            {dummyTheme ? <LightMode/> : <DarkMode/>}
+                            {theme.palette.mode === "light" ? <LightMode/> : <DarkMode/>}
                         </IconButton>
                     </Box>
                 </Toolbar>
@@ -69,22 +75,24 @@ export default function RootPage() {
                         keepMounted: true
                     }}
                     sx={{
-                        display: {xs: 'block', sm: 'none'},
-                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
+                        display: {xs: "block", sm: "none"},
+                        "& .MuiDrawer-paper": {boxSizing: "border-box", width: 240},
                     }}
                 >
-                    <Box onClick={handleDrawerToggle} sx={{textAlign: 'center'}}>
-                        <Typography variant="h6" sx={{my: 2}}>
-                            PDaI 12
-                        </Typography>
+                    <Box sx={{textAlign: "center"}}>
+                        <Typography variant="h6" sx={{my: 2}}>PDaI 12</Typography>
                         <Divider/>
                         <List>
-                            <ListItem key="Theme" disablePadding>
-                                <ListItemButton sx={{textAlign: 'center'}} onClick={switchTheme}>
-                                    <ListItemIcon>
-                                        Theme: {dummyTheme ? "Light" : "Dark"}
-                                    </ListItemIcon>
-                                </ListItemButton>
+                            <ListItem key="Theme Switch" disablePadding>
+                                <FormControlLabel sx={{
+                                    marginY: 0,
+                                    marginLeft: 2,
+                                    marginRight: 1,
+                                    width: "100%",
+                                    justifyContent: "space-between"
+                                }} control={<Switch checked={theme.palette.mode !== "light"}
+                                                    onChange={toggleColorMode}/>
+                                } label="Night Mode" labelPlacement="start"/>
                             </ListItem>
                         </List>
                     </Box>
@@ -92,7 +100,9 @@ export default function RootPage() {
             </nav>
             <Box component="main" sx={{flexGrow: 1, p: 3}}>
                 <Toolbar/>
-                <Container maxWidth="xl">
+                <Typography sx={{display: {xs: "none", sm: "block"}}} variant="h4" align="center"
+                            paddingBottom={2}>{label}</Typography>
+                <Container maxWidth="xs">
                     <Outlet/>
                 </Container>
             </Box>
