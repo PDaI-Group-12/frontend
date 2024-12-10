@@ -28,7 +28,7 @@ createRoot(document.getElementById('root')!).render(
                             <RouterProvider router={
                                 createBrowserRouter(
                                     createRoutesFromElements(
-                                        <Route path="/frontend" element={<RootPage/>}>
+                                        <Route path="/" element={<RootPage/>}>
                                             <Route index element={<LoginPage/>}/>
                                             <Route path="employees"
                                                    element={<ProtectedRoute children={<EmployeesPage/>}/>}/>
@@ -43,7 +43,9 @@ createRoot(document.getElementById('root')!).render(
                                             <Route path="requested-payments"
                                                    element={<ProtectedRoute children={<RequestedPaymentsPage/>}/>}/>
                                         </Route>
-                                    )
+                                    ), {
+                                        basename: "/frontend"
+                                    }
                                 )
                             }/>
                         </AuthProvider>

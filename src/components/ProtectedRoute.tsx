@@ -10,8 +10,7 @@ export function ProtectedRoute(props: ProtectedRouteProps) {
 
     if (!isAuthorized) {
         enqueueSnackbar("Access denied. Please authorize", {variant: "warning"})
-        // TODO Fix issue that react navigation breaking
-        return <Navigate to="login"/>
+        return <Navigate to="/"/>
     }
 
     return <>{props.children}</>

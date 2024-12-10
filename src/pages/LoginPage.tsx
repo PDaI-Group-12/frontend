@@ -1,9 +1,9 @@
 import {useAuth} from "../hooks/useAuth.ts";
-import {useNavigate} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import {Button, FormControl, Stack, TextField} from "@mui/material";
 import {useLabel} from "../hooks/useLabel.ts";
 import {useLogin} from "../services/auth.ts";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {isPasswordInvalid, isUsernameInvalid} from "../util/validator.ts";
 import {useSnackbar} from "notistack";
 
@@ -14,7 +14,6 @@ export function LoginPage() {
 
     console.log(isAuthorized)
 
-    const navigate = useNavigate()
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
@@ -22,10 +21,7 @@ export function LoginPage() {
 
     useLabel().setLabel("Login")
 
-    useEffect(() => {
-        // FIXME Fix later incorrect navigation after login or if already log in
-        if (isAuthorized) navigate("profile")
-    })
+    if (isAuthorized) return <Navigate to="/profile"/>
 
     return (
         <form>
