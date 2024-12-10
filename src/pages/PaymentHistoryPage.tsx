@@ -1,10 +1,13 @@
 import {Card, CardContent, Stack, Typography} from "@mui/material";
 import {AutoColoredAvatar} from "../components/AutoColoredAvatar.tsx";
 import {useLabel} from "../hooks/useLabel.ts";
+import {useEffect} from "react";
 
 export function PaymentHistoryPage() {
 
-    useLabel().setLabel("History")
+    const {setLabel} = useLabel()
+
+    useEffect(() => setLabel("History"))
 
     return (
         <Stack spacing={2}>

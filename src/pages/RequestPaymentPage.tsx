@@ -1,5 +1,5 @@
 import {Button, Card, CardContent, Checkbox, FormControlLabel, Stack, Typography} from "@mui/material";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {AutoColoredAvatar} from "../components/AutoColoredAvatar.tsx";
 import {useLabel} from "../hooks/useLabel.ts";
 
@@ -7,7 +7,9 @@ export function RequestPaymentPage() {
 
     const [isChecked, setIsChecked] = useState(false)
 
-    useLabel().setLabel("Payment {id}")
+    const {setLabel} = useLabel()
+
+    useEffect(() => setLabel("Payment {id}"))
 
     return (
         <Card>

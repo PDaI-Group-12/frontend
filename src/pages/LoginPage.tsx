@@ -3,7 +3,7 @@ import {Navigate} from "react-router-dom";
 import {Button, FormControl, Stack, TextField} from "@mui/material";
 import {useLabel} from "../hooks/useLabel.ts";
 import {useLogin} from "../services/auth.ts";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {isPasswordInvalid, isUsernameInvalid} from "../util/validator.ts";
 import {useSnackbar} from "notistack";
 
@@ -11,6 +11,7 @@ export function LoginPage() {
 
     const {isAuthorized, login} = useAuth()
     const {enqueueSnackbar} = useSnackbar();
+    const {setLabel} = useLabel()
 
     console.log(isAuthorized)
 
@@ -19,7 +20,7 @@ export function LoginPage() {
 
     const loginMutation = useLogin()
 
-    useLabel().setLabel("Login")
+    useEffect(() => setLabel("Login"))
 
     if (isAuthorized) return <Navigate to="/profile"/>
 

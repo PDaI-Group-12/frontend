@@ -3,6 +3,7 @@ import {Employee} from "./types.ts";
 import {toPascalCase} from "../util/text.ts";
 import {useLabel} from "../hooks/useLabel.ts";
 import {AutoColoredAvatar} from "../components/AutoColoredAvatar.tsx";
+import {useEffect} from "react";
 
 export function EmployeesPage() {
     const sampleEmployees: Employee[] = [
@@ -11,7 +12,9 @@ export function EmployeesPage() {
         {id: 3, fname: "Harry", lname: "Potter", iban: "FI 3456 456 56", role: "employer"}
     ];
 
-    useLabel().setLabel("Employees")
+    const {setLabel} = useLabel()
+
+    useEffect(() => setLabel("Employees"))
 
     return (
         <Stack spacing={2}>

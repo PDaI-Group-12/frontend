@@ -1,12 +1,12 @@
 import {Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, TextField,} from "@mui/material";
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, useEffect, useState} from "react";
 import {useLabel} from "../hooks/useLabel.ts";
 
 export function SaveHoursPage() {
     const [hours, setHours] = useState("")
     const [type, setType] = useState("")
 
-    useLabel().setLabel("Save hours")
+    const {setLabel} = useLabel()
 
     const handleHoursChange = (event: ChangeEvent<HTMLInputElement>) => {
         setHours(event.target.value)
@@ -15,6 +15,8 @@ export function SaveHoursPage() {
     const handleTypeChange = (event: SelectChangeEvent) => {
         setType(event.target.value as string)
     }
+
+    useEffect(() => setLabel("Save hours"))
 
     const isButtonDisabled = hours.trim() === "" || type.trim() === ""
 

@@ -1,10 +1,13 @@
 import {Card, CardActionArea, CardContent, Stack, Typography} from "@mui/material";
 import {useLabel} from "../hooks/useLabel.ts";
 import {AutoColoredAvatar} from "../components/AutoColoredAvatar.tsx";
+import {useEffect} from "react";
 
 export default function RequestedPaymentsPage() {
 
-    useLabel().setLabel("Requested Payments")
+    const {setLabel} = useLabel()
+
+    useEffect(() => setLabel("Requested Payments"))
 
     return (
         <Stack spacing={2} sx={{alignItems: "center"}}>

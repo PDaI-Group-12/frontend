@@ -1,7 +1,7 @@
 import {Card, Fab, FormControl, Stack, TextField} from "@mui/material";
 import {Employee} from "./types.ts";
 import {Edit, Save} from "@mui/icons-material";
-import {FormEvent, useState} from "react";
+import {FormEvent, useEffect, useState} from "react";
 import {MultilineTypography} from "../components/MultilineTypography.tsx";
 import {isFirstNameInvalid, isIBANInvalid, isLastNameInvalid, isPasswordInvalid} from "../util/validator.ts";
 import {useLabel} from "../hooks/useLabel.ts";
@@ -22,7 +22,9 @@ export function EditUserPage() {
     const [iban, setIBAN] = useState(exampleEmployee.iban)
     const [isEdit, setIsEdit] = useState(false);
 
-    useLabel().setLabel("User edit")
+    const {setLabel} = useLabel()
+
+    useEffect(() => setLabel("User edit"))
 
     return (
         <Card>
