@@ -8,6 +8,11 @@ export interface ApiMessage {
     message: string
 }
 
+export interface UserWithSalary {
+    user: User,
+    hourlySalary: string
+}
+
 export interface User {
     id?: number
     firstname?: string

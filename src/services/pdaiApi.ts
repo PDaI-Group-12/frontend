@@ -1,4 +1,4 @@
-import {ApiMessage, AuthToken, User} from "./types.ts";
+import {ApiMessage, AuthToken, User, UserWithSalary} from "./types.ts";
 
 /*  This file and folder will be used for backend api request implements  */
 const hostUrl: string = "http://0.0.0.0:3000"
@@ -27,3 +27,30 @@ export const login = async (user: User): Promise<AuthToken> => {
 
     return await response.json() as AuthToken
 }
+
+/*   USER   */
+export const getUser = async (token: string): Promise<UserWithSalary> => {
+    const response = await fetch(`${hostUrl}/user`, {
+        headers: {
+            "Authorization": `Bearer: ${token}`
+        }
+    })
+
+    if (response.status !== 200) throw new Error((await response.json() as ApiMessage).message)
+
+    return await response.json() as UserWithSalary
+}
+
+export const updateUser = async (token: string, user: User): Promise<User> => {
+    const response = await fetch(`${hostUrl}/user/edit`, {
+        method: "PUT", headers: {
+            "Authorization": `Bearer: ${token}`,
+            "Content-Type": "application/json"
+        }, body: JSON.stringify(user)
+    })
+
+    if (response.status !== 200) throw new Error((await response.json() as ApiMessage).message)
+
+    return await response.json() as User
+}
+
