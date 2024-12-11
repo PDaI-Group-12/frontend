@@ -33,3 +33,14 @@ export interface Employees {
     firstname: string
     lastname: string
 }
+
+export interface HistoryData {
+    userid: number
+    totalhours: number
+    permanentsalary: number
+}
+
+export interface HistoryResponse {
+    message: string
+    data: HistoryData
+}

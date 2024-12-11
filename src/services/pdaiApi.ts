@@ -1,4 +1,11 @@
-import {ApiMessage, AuthToken, EmployeesResponse, User, UserWithSalary} from "./types.ts";
+import {
+    ApiMessage,
+    AuthToken,
+    EmployeesResponse, HistoryResponse,
+    User,
+    UserHistoryResponse,
+    UserWithSalary
+} from "./types.ts";
 
 /*  This file and folder will be used for backend api request implements  */
 const hostUrl: string = "http://localhost:3000"
@@ -66,3 +73,14 @@ export const getEmployees = async (token: string): Promise<EmployeesResponse> =>
     return await response.json() as EmployeesResponse
 }
 
+export const getHistory = async (token: string): Promise<HistoryResponse> => {
+    const response = await fetch(`${hostUrl}/user/history`, {
+        headers: {
+            "Authorization": `Bearer: ${token}`
+        }
+    })
+
+    if (response.status !== 200) throw new Error((await response.json() as ApiMessage).message)
+
+    return await response.json() as HistoryResponse
+}
