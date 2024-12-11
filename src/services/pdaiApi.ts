@@ -1,7 +1,7 @@
-import {ApiMessage, AuthToken, User, UserWithSalary} from "./types.ts";
+import {ApiMessage, AuthToken, Employees, User, UserWithSalary} from "./types.ts";
 
 /*  This file and folder will be used for backend api request implements  */
-const hostUrl: string = "http://0.0.0.0:3000"
+const hostUrl: string = "http://localhost:3000"
 
 /*   AUTH   */
 export const registration = async (user: User): Promise<ApiMessage> => {
@@ -52,5 +52,17 @@ export const updateUser = async (token: string, user: User): Promise<User> => {
     if (response.status !== 200) throw new Error((await response.json() as ApiMessage).message)
 
     return await response.json() as User
+}
+
+export const getEmployees = async ( token: string ): Promise<Employees> => {
+    const response = await fetch(`${hostUrl}/user/employees`, {
+        headers: {
+            "Authorization": `Bearer: ${token}`
+        }
+    })
+
+    if (response.status !== 200) throw new Error((await response.json() as ApiMessage).message)
+
+    return await response.json() as Employees
 }
 

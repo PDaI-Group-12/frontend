@@ -22,3 +22,11 @@ export interface User {
     role?: string
     iban?: string
 }
+
+export interface Employees {
+    employers: {
+        id: number
+        firstname: string
+        lastname: string
+    }
+}[]
