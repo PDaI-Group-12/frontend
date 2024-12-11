@@ -22,3 +22,14 @@ export interface User {
     role?: string
     iban?: string
 }
+
+export interface EmployeesResponse {
+    message: string
+    employees: Employees[]
+}
+
+export interface Employees {
+    id: number
+    firstname: string
+    lastname: string
+}
