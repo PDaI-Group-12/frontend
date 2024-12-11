@@ -15,10 +15,11 @@ import {
     Typography,
     useTheme
 } from "@mui/material";
-import {DarkMode, LightMode, Menu} from "@mui/icons-material";
+import {DarkMode, LightMode, Logout, Menu} from "@mui/icons-material";
 import {useState} from "react";
 import {useThemeSwitch} from "../hooks/useThemeSwitch.ts";
 import {useLabel} from "../hooks/useLabel.ts";
+import {useAuth} from "../hooks/useAuth.ts";
 
 export function RootPage() {
 
@@ -26,6 +27,7 @@ export function RootPage() {
 
     const {toggleColorMode} = useThemeSwitch()
     const theme = useTheme()
+    const {logout, isAuthorized} = useAuth()
 
     const {label} = useLabel()
 
@@ -62,6 +64,14 @@ export function RootPage() {
                         >
                             {theme.palette.mode === "light" ? <LightMode/> : <DarkMode/>}
                         </IconButton>
+                        {isAuthorized && <IconButton
+                            size="large"
+                            name="Logout"
+                            onClick={logout}
+                            color="inherit"
+                        >
+                            <Logout/>
+                        </IconButton>}
                     </Box>
                 </Toolbar>
             </AppBar>
