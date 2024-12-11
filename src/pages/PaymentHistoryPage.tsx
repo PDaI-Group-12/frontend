@@ -1,5 +1,4 @@
 import {Box, Card, CardContent, CircularProgress, Stack, Typography} from "@mui/material";
-import {AutoColoredAvatar} from "../components/AutoColoredAvatar.tsx";
 import {useLabel} from "../hooks/useLabel.ts";
 import {useEffect} from "react";
 import {useHistory} from "../services/history.ts";
