@@ -1,5 +1,4 @@
 import {Box, Card, CardActionArea, CardContent, CircularProgress, Stack, Typography} from "@mui/material";
-import {toPascalCase} from "../util/text.ts";
 import {useLabel} from "../hooks/useLabel.ts";
 import {AutoColoredAvatar} from "../components/AutoColoredAvatar.tsx";
 import {useEffect} from "react";
@@ -20,27 +19,24 @@ export function EmployeesPage() {
     }
 
     if (status === "error") {
-        return <Typography>Something went wrong</Typography>
+        return <Typography> {error?.message ?? "Something went wrong"}</Typography>
     }
 
     return (
         <Stack spacing={2}>
-            {data.map(({Employee}) => (
-                <Card key={Employee.id}>
-                    <CardActionArea>
-                        <CardContent>
-                            <Stack direction="row" spacing={2} alignItems="center">
-                                <AutoColoredAvatar text={`${Employee.firstname[0]}${Employee.lastname[0]}`}/>
-                                <Stack>
-                                    <Typography variant="h6">{Employee.firstname} {Employee.lastname}</Typography>
-                                    <Typography color="darkgrey"
-                                                variant="subtitle2"> {toPascalCase(Employee.role)} </Typography>
-                                </Stack>
+            {status === "success" && data.employers.map((employ) => <Card key={employ.id}>
+                <CardActionArea>
+                    <CardContent>
+                        <Stack direction="row" spacing={2} alignItems="center">
+                            <AutoColoredAvatar text={`${employ.firstname[0]}${employ.lastname[0]}`}/>
+                            <Stack>
+                                <Typography variant="h6">{employ.firstname} {employ.lastname}</Typography>
+                                {/*<Typography color="darkgrey" variant="subtitle2"> {toPascalCase(employ.role)} </Typography>*/}
                             </Stack>
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
-            ))}
+                        </Stack>
+                    </CardContent>
+                </CardActionArea>
+            </Card>)}
         </Stack>
     );
 }

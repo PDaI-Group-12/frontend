@@ -23,10 +23,13 @@ export interface User {
     iban?: string
 }
 
+export interface EmployeesResponse {
+    message: string
+    employers: Employees[]
+}
+
 export interface Employees {
-    employers: {
-        id: number
-        firstname: string
-        lastname: string
-    }
-}[]
+    id: number
+    firstname: string
+    lastname: string
+}

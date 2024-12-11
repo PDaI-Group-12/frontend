@@ -1,11 +1,11 @@
 import {useAuth} from "../hooks/useAuth.ts";
 import {useQuery} from "@tanstack/react-query";
-import {Employees} from "./types.ts";
+import {EmployeesResponse} from "./types.ts";
 import {getEmployees} from "./pdaiApi.ts";
 
 export const useEmployees = () => {
     const {token} = useAuth()
-    return useQuery<Employees, Error>({
+    return useQuery<EmployeesResponse, Error>({
         queryKey: ["employees"],
         queryFn: () => getEmployees(token)
     })
