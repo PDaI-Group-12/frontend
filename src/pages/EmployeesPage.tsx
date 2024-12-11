@@ -24,14 +24,13 @@ export function EmployeesPage() {
 
     return (
         <Stack spacing={2}>
-            {status === "success" && data.employers.map((employ) => <Card key={employ.id}>
+            {status === "success" && data.employees.map((employ) => <Card key={employ.id}>
                 <CardActionArea>
                     <CardContent>
                         <Stack direction="row" spacing={2} alignItems="center">
                             <AutoColoredAvatar text={`${employ.firstname[0]}${employ.lastname[0]}`}/>
                             <Stack>
                                 <Typography variant="h6">{employ.firstname} {employ.lastname}</Typography>
-                                {/*<Typography color="darkgrey" variant="subtitle2"> {toPascalCase(employ.role)} </Typography>*/}
                             </Stack>
                         </Stack>
                     </CardContent>

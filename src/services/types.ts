@@ -25,7 +25,7 @@ export interface User {
 
 export interface EmployeesResponse {
     message: string
-    employers: Employees[]
+    employees: Employees[]
 }
 
 export interface Employees {
