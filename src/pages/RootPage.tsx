@@ -34,7 +34,7 @@ export function RootPage() {
     const theme = useTheme()
     const {logout, isAuthorized, token} = useAuth()
 
-    const emploRole = (decodeToken(token)?.role ?? "employee") === "employee"
+    const emploRole = (decodeToken(token)?.role ?? "employer") === "employer"
 
     const {label} = useLabel()
 
