@@ -1,7 +1,7 @@
 import {useAuth} from "../hooks/useAuth.ts";
-import {useMutation} from "@tanstack/react-query";
-import {SaveHours, SaveHoursResponse, SavePermanent, SavePermanentResponse} from "./types.ts";
-import {saveHours, savePermanent} from "./pdaiApi.ts";
+import {useMutation, useQuery} from "@tanstack/react-query";
+import {SaveHours, SaveHoursResponse, SavePermanent, SavePermanentResponse, UnpaidSalaryResponse} from "./types.ts";
+import {saveHours, savePermanent, getUnpaidSalary} from "./pdaiApi.ts";
 import {isTokenInvalidByBackend} from "../util/validator.ts";
 
 export const useSaveHoursMutation = () => {
@@ -23,5 +23,11 @@ export const useSavePermanentMutation = () => {
         onError: (error) => {
             if (isTokenInvalidByBackend(error.message)) logout()
         }
+
+export const useUnpaidSalary = () => {
+    const {token} = useAuth()
+    return useQuery<UnpaidSalaryResponse, Error>({
+        queryKey: ["unpaidsalary"],
+        queryFn: () => getUnpaidSalary(token)
     })
 }

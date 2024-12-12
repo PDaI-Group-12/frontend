@@ -2,7 +2,12 @@ import {
     ApiMessage,
     AuthToken,
     EmployeesResponse,
-    HistoryResponse, SaveHours, SaveHoursResponse, SavePermanent, SavePermanentResponse,
+    HistoryResponse, 
+    SaveHours,
+    SaveHoursResponse, 
+    SavePermanent, 
+    SavePermanentResponse,
+    UnpaidSalaryResponse,
     User,
     UserWithSalary
 } from "./types.ts";
@@ -109,4 +114,16 @@ export const savePermanent = async (token: string, savePermanent: SavePermanent)
     if (response.status !== 201) throw new Error((await response.json() as ApiMessage).message)
 
     return await response.json() as SavePermanentResponse
+}
+
+export const getUnpaidSalary = async (token: string): Promise<UnpaidSalaryResponse> => {
+    const response = await fetch(`${hostUrl}/salary/unpaid`, {
+        headers: {
+            "Authorization": `Bearer: ${token}`
+        }
+    })
+
+    if (response.status !== 200) throw new Error((await response.json() as ApiMessage).message)
+
+    return await response.json() as UnpaidSalaryResponse
 }

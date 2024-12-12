@@ -1,11 +1,9 @@
-export interface AuthToken {
-    message: string
+export interface AuthToken extends MessageResponse {
     token: string
 }
 
-export interface ApiMessage {
+export interface ApiMessage extends MessageResponse {
     code: number
-    message: string
 }
 
 export interface UserWithSalary {
@@ -23,8 +21,7 @@ export interface User {
     iban?: string
 }
 
-export interface EmployeesResponse {
-    message: string
+export interface EmployeesResponse extends MessageResponse {
     employees: Employees[]
 }
 
@@ -40,8 +37,7 @@ export interface HistoryData {
     permanentsalary: number
 }
 
-export interface HistoryResponse {
-    message: string
+export interface HistoryResponse extends MessageResponse {
     data: HistoryData
 }
 
@@ -66,3 +62,16 @@ export interface SavePermanent {
 export interface SavePermanentResponse extends MessageResponse{
     entry: SavePermanent
 }
+
+export interface UnpaidSalaryResponse extends MessageResponse {
+    data: UnpaidSalary
+}
+
+export interface UnpaidSalary {
+    userid: number,
+    unpaid_hours: number,
+    hourlySalary: number,
+    unpaid_permanent_salaries: number,
+    totalSalary: number
+}
+

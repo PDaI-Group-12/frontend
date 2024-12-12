@@ -2,7 +2,7 @@ import {
     Box,
     Card,
     Checkbox,
-    CircularProgress,
+    CircularProgress, Divider,
     Fab,
     FormControl,
     FormControlLabel,
@@ -18,10 +18,12 @@ import {useLabel} from "../hooks/useLabel.ts";
 import {useUser, useUserEditMutation} from "../services/user.ts";
 import {useSnackbar} from "notistack";
 import {useAuth} from "../hooks/useAuth.ts";
+import {useUnpaidSalary} from "../services/salary.ts";
 
 export function EditUserPage() {
 
     const {data, status, error} = useUser()
+    const {data:unpaidData, status:unpaidStatus, error:unpaidError} = useUnpaidSalary()
     const editUserMutation = useUserEditMutation()
 
     const [firstName, setFirstName] = useState(data?.user?.username ?? "")
@@ -36,15 +38,15 @@ export function EditUserPage() {
 
     useEffect(() => setLabel("User edit"))
 
-    if (status === "pending") {
+    if (status === "pending" || unpaidStatus === "pending") {
         return <Box flexGrow={1} alignItems="center">
             <CircularProgress/>
         </Box>;
     }
 
     if (status === "error") {
-        if (isTokenInvalidByBackend(error.message)) logout()
-        enqueueSnackbar(error?.message ?? "Something went wrong", {variant: "error"})
+        if (isTokenInvalidByBackend(error?.message ?? "")) logout()
+        enqueueSnackbar(error?.message ?? unpaidError?.message ?? "Something went wrong", {variant: "error"})
         return <Typography>Something went wrong</Typography>
     }
 
@@ -53,9 +55,6 @@ export function EditUserPage() {
             {status === "success" &&
                 <form onSubmit={(event: FormEvent) => {
                     event.preventDefault()
-
-                    console.log(editUserMutation)
-                    console.log(confirm)
 
                     if (isFirstNameInvalid(firstName)
                         || isLastNameInvalid(lastName)
@@ -124,6 +123,14 @@ export function EditUserPage() {
                                     <MultilineTypography><b>Password:</b> *********</MultilineTypography>
                                     <MultilineTypography><b>Role:</b> {data.user.role}</MultilineTypography>
                                     <MultilineTypography><b>IBAN:</b> {data.user.iban}</MultilineTypography>
+                                    <Divider/>
+                                    {unpaidError && <MultilineTypography>{unpaidError?.message ?? "Something went wrong"}</MultilineTypography>}
+                                    {unpaidData && <>
+                                        <MultilineTypography><b>Unpaid Hours:</b> {unpaidData.data.unpaid_hours}</MultilineTypography>
+                                        <MultilineTypography><b>Hourly Salary:</b> {unpaidData.data.hourlySalary}</MultilineTypography>
+                                        <MultilineTypography><b>Unpaid Permanent Salaries:</b> {unpaidData.data.unpaid_permanent_salaries}</MultilineTypography>
+                                        <MultilineTypography><b>Total Salary:</b> {unpaidData.data.totalSalary}</MultilineTypography>
+                                    </>}
                                 </>
                             }
                         </Stack>
