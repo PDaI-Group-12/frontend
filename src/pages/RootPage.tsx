@@ -2,6 +2,7 @@ import {Outlet} from "react-router-dom";
 import {
     AppBar,
     Box,
+    Button,
     Container,
     CssBaseline,
     Divider,
@@ -9,7 +10,10 @@ import {
     FormControlLabel,
     IconButton,
     List,
-    ListItem, ListItemButton, ListItemIcon, ListItemText,
+    ListItem,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText,
     Switch,
     Toolbar,
     Typography,
@@ -51,10 +55,29 @@ export function RootPage() {
                     <Typography
                         variant="h6"
                         component="div"
-                        sx={{flexGrow: 1, display: {xs: "none", sm: "block"}}}
+                        sx={{display: {xs: "none", sm: "block"}}}
                     >
                         PDaI 12
                     </Typography>
+                    {isAuthorized &&
+                        <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}, paddingX: 2}}>
+                            <Button color="inherit">
+                                Profile
+                            </Button>
+                            <Button color="inherit">
+                                History
+                            </Button>
+                            <Button color="inherit">
+                                Save hours
+                            </Button>
+                            <Button color="inherit">
+                                Requested Payments
+                            </Button>
+                            <Button color="inherit">
+                                Register (admin)
+                            </Button>
+                        </Box>
+                    }
                     <Box sx={{display: {xs: "none", sm: "block"}}}>
                         <IconButton
                             size="large"
@@ -112,9 +135,9 @@ export function RootPage() {
                             handleDrawerToggle()
                         }}>
                             <ListItemIcon>
-                                <Logout />
+                                <Logout/>
                             </ListItemIcon>
-                            <ListItemText primary="Logout" />
+                            <ListItemText primary="Logout"/>
                         </ListItemButton>
                     </Box>
                 </Drawer>
