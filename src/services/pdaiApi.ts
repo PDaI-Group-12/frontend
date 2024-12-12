@@ -1,9 +1,9 @@
 import {
     ApiMessage,
     AuthToken,
-    EmployeesResponse, HistoryResponse,
+    EmployeesResponse,
+    HistoryResponse,
     User,
-    UserHistoryResponse,
     UserWithSalary
 } from "./types.ts";
 
