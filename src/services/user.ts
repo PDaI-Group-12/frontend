@@ -1,6 +1,6 @@
-import {getUser, updateUser} from "./pdaiApi.ts";
+import {deleteUser, getUser, updateUser} from "./pdaiApi.ts";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
-import {User, UserWithSalary} from "./types.ts";
+import {MessageResponse, User, UserWithSalary} from "./types.ts";
 import {useAuth} from "../hooks/useAuth.ts";
 import {isTokenInvalidByBackend} from "../util/validator.ts";
 
@@ -23,5 +23,16 @@ export const useUserEditMutation = () => {
             if (isTokenInvalidByBackend(error.message)) logout()
         }
     });
+}
+
+export const useDeleteUserMutation = () => {
+    const {token, logout} = useAuth()
+    return useMutation<MessageResponse, Error>({
+        mutationKey: ["deleteUser"],
+        mutationFn: () => deleteUser(token),
+        onError: (error) => {
+            if (isTokenInvalidByBackend(error.message)) logout()
+        }
+    })
 }
 

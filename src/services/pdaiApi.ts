@@ -2,10 +2,11 @@ import {
     ApiMessage,
     AuthToken,
     EmployeesResponse,
-    HistoryResponse, 
+    HistoryResponse,
+    MessageResponse,
     SaveHours,
-    SaveHoursResponse, 
-    SavePermanent, 
+    SaveHoursResponse,
+    SavePermanent,
     SavePermanentResponse,
     UnpaidSalaryResponse,
     User,
@@ -126,4 +127,16 @@ export const getUnpaidSalary = async (token: string): Promise<UnpaidSalaryRespon
     if (response.status !== 200) throw new Error((await response.json() as ApiMessage).message)
 
     return await response.json() as UnpaidSalaryResponse
+}
+
+export const deleteUser = async (token: string): Promise<MessageResponse> => {
+    const response = await fetch(`${hostUrl}/user/delete`, {
+        method: "DELETE", headers: {
+            "Authorization": `Bearer: ${token}`
+        }
+    })
+    if (response.status !== 200) throw new Error((await response.json() as ApiMessage).message)
+
+    return await response.json() as MessageResponse
+
 }

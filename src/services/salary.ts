@@ -1,7 +1,7 @@
 import {useAuth} from "../hooks/useAuth.ts";
 import {useMutation, useQuery} from "@tanstack/react-query";
 import {SaveHours, SaveHoursResponse, SavePermanent, SavePermanentResponse, UnpaidSalaryResponse} from "./types.ts";
-import {saveHours, savePermanent, getUnpaidSalary} from "./pdaiApi.ts";
+import {getUnpaidSalary, saveHours, savePermanent} from "./pdaiApi.ts";
 import {isTokenInvalidByBackend} from "../util/validator.ts";
 
 export const useSaveHoursMutation = () => {
