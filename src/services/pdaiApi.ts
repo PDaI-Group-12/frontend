@@ -138,5 +138,15 @@ export const deleteUser = async (token: string): Promise<MessageResponse> => {
     if (response.status !== 200) throw new Error((await response.json() as ApiMessage).message)
 
     return await response.json() as MessageResponse
+}
 
+export const registerUser = async (register: User): Promise<MessageResponse> => {
+    const response = await fetch(`${hostUrl}/auth/register`, {
+        method: "POST", headers: {
+            "Content-Type": "application/json"
+        }, body: JSON.stringify(register)
+    })
+    if (response.status !== 201) throw new Error((await response.json() as ApiMessage).message)
+
+    return await response.json() as MessageResponse
 }
