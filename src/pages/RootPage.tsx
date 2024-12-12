@@ -44,7 +44,7 @@ export function RootPage() {
     const navigateToHistory = () => navigate("/payment-history")
     const navigateToSaveHours = () => navigate("/save-hours")
     const navigateToRequestedPayments = () => navigate("/requested-payments")
-    const navigateToRegisterUser = () => navigate("/register-user")
+    const navigateToRegisterUser = () => navigate("/register")
 
     const handleDrawerToggle = () => setMobileOpen((prevState) => !prevState);
 
