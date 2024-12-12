@@ -2,7 +2,11 @@ import {
     ApiMessage,
     AuthToken,
     EmployeesResponse,
-    HistoryResponse,
+    HistoryResponse, 
+    SaveHours,
+    SaveHoursResponse, 
+    SavePermanent, 
+    SavePermanentResponse,
     UnpaidSalaryResponse,
     User,
     UserWithSalary
@@ -86,7 +90,32 @@ export const getHistory = async (token: string): Promise<HistoryResponse> => {
     return await response.json() as HistoryResponse
 }
 
-/*      */
+export const saveHours = async (token: string, saveHours: SaveHours): Promise<SaveHoursResponse> => {
+    const response = await fetch(`${hostUrl}/salary/hours`, {
+        method: "POST", headers: {
+            "Authorization": `Bearer: ${token}`,
+            "Content-Type": "application/json"
+        }, body: JSON.stringify(saveHours)
+    })
+
+    if (response.status !== 201) throw new Error((await response.json() as ApiMessage).message)
+
+    return await response.json() as SaveHoursResponse
+}
+
+export const savePermanent = async (token: string, savePermanent: SavePermanent): Promise<SavePermanentResponse> => {
+    const response = await fetch(`${hostUrl}/salary/permanent`, {
+        method: "POST", headers: {
+            "Authorization": `Bearer: ${token}`,
+            "Content-Type": "application/json"
+        }, body: JSON.stringify(savePermanent)
+    })
+
+    if (response.status !== 201) throw new Error((await response.json() as ApiMessage).message)
+
+    return await response.json() as SavePermanentResponse
+}
+
 export const getUnpaidSalary = async (token: string): Promise<UnpaidSalaryResponse> => {
     const response = await fetch(`${hostUrl}/salary/unpaid`, {
         headers: {
@@ -98,4 +127,3 @@ export const getUnpaidSalary = async (token: string): Promise<UnpaidSalaryRespon
 
     return await response.json() as UnpaidSalaryResponse
 }
-
