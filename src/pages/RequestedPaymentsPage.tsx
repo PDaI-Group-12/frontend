@@ -23,17 +23,16 @@ export default function RequestedPaymentsPage() {
     }
 
     return (
-        <Stack spacing={2} sx={{alignItems: "center"}}>
+        <Stack spacing={2}>
             {status === "success" && data.data.map((data, index) => <Card key={index + 1}>
                 <CardActionArea>
                     <CardContent>
                         <Stack direction="row" spacing={2} alignItems="center">
                             <AutoColoredAvatar text={`${data.firstname[0]}${data.lastname[0]}`}/>
-                            <Stack>
+                            <Stack flexGrow={1}>
                                 <Typography variant="h6">{data.firstname} {data.lastname}</Typography>
                                 <Typography color="darkgrey" variant="subtitle2">{data.iban}</Typography>
-                                <Typography color="gray" fontWeight="bold" variant="subtitle2"
-                                            align="right">
+                                <Typography color="gray" fontWeight="bold" variant="subtitle2" align="right">
                                     {data.unpaid_permanent_salaries !== 0
                                         ? `${data.unpaid_permanent_salaries} €`
                                         : `${data.unpaid_hours} €`}
