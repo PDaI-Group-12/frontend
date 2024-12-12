@@ -23,6 +23,8 @@ export const useSavePermanentMutation = () => {
         onError: (error) => {
             if (isTokenInvalidByBackend(error.message)) logout()
         }
+    })
+}
 
 export const useUnpaidSalary = () => {
     const {token} = useAuth()
