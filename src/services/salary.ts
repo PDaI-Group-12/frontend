@@ -1,7 +1,14 @@
 import {useAuth} from "../hooks/useAuth.ts";
 import {useMutation, useQuery} from "@tanstack/react-query";
-import {SaveHours, SaveHoursResponse, SavePermanent, SavePermanentResponse, UnpaidSalaryResponse} from "./types.ts";
-import {getUnpaidSalary, saveHours, savePermanent} from "./pdaiApi.ts";
+import {
+    SaveHours,
+    SaveHoursResponse,
+    SavePermanent,
+    SavePermanentResponse,
+    UnPaidSalariesResponse,
+    UnpaidSalaryResponse
+} from "./types.ts";
+import {getUnpaidSalaries, getUnpaidSalary, saveHours, savePermanent} from "./pdaiApi.ts";
 import {isTokenInvalidByBackend} from "../util/validator.ts";
 
 export const useSaveHoursMutation = () => {
@@ -31,5 +38,13 @@ export const useUnpaidSalary = () => {
     return useQuery<UnpaidSalaryResponse, Error>({
         queryKey: ["unpaidsalary"],
         queryFn: () => getUnpaidSalary(token)
+    })
+}
+
+export const useUnPaidSalaries = () => {
+    const {token} = useAuth()
+    return useQuery<UnPaidSalariesResponse, Error>({
+        queryKey: ["unpaidsalaries"],
+        queryFn: () => getUnpaidSalaries(token)
     })
 }

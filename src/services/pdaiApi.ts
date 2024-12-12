@@ -8,6 +8,7 @@ import {
     SaveHoursResponse,
     SavePermanent,
     SavePermanentResponse,
+    UnPaidSalariesResponse,
     UnpaidSalaryResponse,
     User,
     UserWithSalary
@@ -149,4 +150,15 @@ export const registerUser = async (register: User): Promise<MessageResponse> => 
     if (response.status !== 201) throw new Error((await response.json() as ApiMessage).message)
 
     return await response.json() as MessageResponse
+}
+
+export const getUnpaidSalaries = async (token: string): Promise<UnPaidSalariesResponse> => {
+    const response = await fetch(`${hostUrl}/salary/listunpaid`, {
+        headers: {
+            "Authorization": `Bearer: ${token}`
+        }
+    })
+    if (response.status !== 200) throw new Error((await response.json() as ApiMessage).message)
+
+    return await response.json() as UnPaidSalariesResponse
 }
