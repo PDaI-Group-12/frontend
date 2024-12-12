@@ -1,4 +1,4 @@
-import {Outlet} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 import {
     AppBar,
     Box,
@@ -19,11 +19,12 @@ import {
     Typography,
     useTheme
 } from "@mui/material";
-import {DarkMode, LightMode, Logout, Menu} from "@mui/icons-material";
+import {AttachMoney, DarkMode, Groups, History, LightMode, Logout, Menu, People, Timelapse} from "@mui/icons-material";
 import {useState} from "react";
 import {useThemeSwitch} from "../hooks/useThemeSwitch.ts";
 import {useLabel} from "../hooks/useLabel.ts";
 import {useAuth} from "../hooks/useAuth.ts";
+import {decodeToken} from "../util/text.ts";
 
 export function RootPage() {
 
@@ -31,9 +32,19 @@ export function RootPage() {
 
     const {toggleColorMode} = useThemeSwitch()
     const theme = useTheme()
-    const {logout, isAuthorized} = useAuth()
+    const {logout, isAuthorized, token} = useAuth()
+
+    const emploRole = (decodeToken(token)?.role ?? "employee") === "employee"
 
     const {label} = useLabel()
+
+    const navigate = useNavigate()
+
+    const navigateToProfile = () => navigate("/profile")
+    const navigateToHistory = () => navigate("/payment-history")
+    const navigateToSaveHours = () => navigate("/save-hours")
+    const navigateToRequestedPayments = () => navigate("/requested-payments")
+    const navigateToRegisterUser = () => navigate("/register-user")
 
     const handleDrawerToggle = () => setMobileOpen((prevState) => !prevState);
 
@@ -59,25 +70,27 @@ export function RootPage() {
                     >
                         PDaI 12
                     </Typography>
-                    {isAuthorized &&
-                        <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}, paddingX: 2}}>
-                            <Button color="inherit">
+                    <Box sx={{flexGrow: 1, display: {xs: 'none', sm: 'flex'}, paddingX: 2}}>
+                        {isAuthorized && <>
+                            <Button color="inherit" onClick={navigateToProfile}>
                                 Profile
                             </Button>
-                            <Button color="inherit">
+                            <Button color="inherit" onClick={navigateToHistory}>
                                 History
                             </Button>
-                            <Button color="inherit">
+                            <Button color="inherit" onClick={navigateToSaveHours}>
                                 Save hours
                             </Button>
-                            <Button color="inherit">
-                                Requested Payments
-                            </Button>
-                            <Button color="inherit">
-                                Register (admin)
-                            </Button>
-                        </Box>
-                    }
+                            {emploRole && <>
+                                <Button color="inherit" onClick={navigateToRequestedPayments}>
+                                    Requested Payments
+                                </Button>
+                                <Button color="inherit" onClick={navigateToRegisterUser}>
+                                    Register User
+                                </Button>
+                            </>}
+                        </>}
+                    </Box>
                     <Box sx={{display: {xs: "none", sm: "block"}}}>
                         <IconButton
                             size="large"
@@ -127,6 +140,53 @@ export function RootPage() {
                                                     onChange={toggleColorMode}/>
                                 } label="Night Mode" labelPlacement="start"/>
                             </ListItem>
+                            <ListItemButton onClick={() => {
+                                handleDrawerToggle()
+                                navigateToProfile()
+                            }}>
+                                <ListItemIcon>
+                                    <People/>
+                                </ListItemIcon>
+                                <ListItemText primary="Profile"/>
+                            </ListItemButton>
+                            <ListItemButton onClick={() => {
+                                handleDrawerToggle()
+                                navigateToHistory()
+                            }}>
+                                <ListItemIcon>
+                                    <History/>
+                                </ListItemIcon>
+                                <ListItemText primary="History"/>
+                            </ListItemButton>
+                            <ListItemButton onClick={() => {
+                                handleDrawerToggle()
+                                navigateToSaveHours()
+                            }}>
+                                <ListItemIcon>
+                                    <Timelapse/>
+                                </ListItemIcon>
+                                <ListItemText primary="Save hours"/>
+                            </ListItemButton>
+                            {emploRole && <>
+                                <ListItemButton onClick={() => {
+                                    handleDrawerToggle()
+                                    navigateToRequestedPayments()
+                                }}>
+                                    <ListItemIcon>
+                                        <AttachMoney/>
+                                    </ListItemIcon>
+                                    <ListItemText primary="Requested Payments"/>
+                                </ListItemButton>
+                                <ListItemButton onClick={() => {
+                                    handleDrawerToggle()
+                                    navigateToRegisterUser()
+                                }}>
+                                    <ListItemIcon>
+                                        <Groups/>
+                                    </ListItemIcon>
+                                    Register User
+                                </ListItemButton>
+                            </>}
                         </List>
                     </Box>
                     <Box marginTop="auto">
