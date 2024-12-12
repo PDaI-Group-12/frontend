@@ -44,3 +44,11 @@ export interface HistoryResponse {
     message: string
     data: HistoryData
 }
+
+export interface UnpaidSalary {
+    userid: number,
+    unpaid_hours: number,
+    hourlySalary: number,
+    unpaid_permanent_salaries: number,
+    totalSalary: number
+}
