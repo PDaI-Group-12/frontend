@@ -2,7 +2,7 @@ import {
     ApiMessage,
     AuthToken,
     EmployeesResponse,
-    HistoryResponse,
+    HistoryResponse, UnpaidSalary,
     User,
     UserWithSalary
 } from "./types.ts";
@@ -84,3 +84,17 @@ export const getHistory = async (token: string): Promise<HistoryResponse> => {
 
     return await response.json() as HistoryResponse
 }
+
+/*      */
+export const getUnpaidSalary = async (token: string): Promise<UnpaidSalary> => {
+    const response = await fetch(`${hostUrl}/salary/unpaid`, {
+        headers: {
+            "Authorization": `Bearer: ${token}`
+        }
+    })
+
+    if (response.status !== 200) throw new Error((await response.json() as ApiMessage).message)
+
+    return await response.json() as UnpaidSalary
+}
+
