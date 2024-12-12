@@ -9,7 +9,7 @@ import {
     FormControlLabel,
     IconButton,
     List,
-    ListItem,
+    ListItem, ListItemButton, ListItemIcon, ListItemText,
     Switch,
     Toolbar,
     Typography,
@@ -105,6 +105,17 @@ export function RootPage() {
                                 } label="Night Mode" labelPlacement="start"/>
                             </ListItem>
                         </List>
+                    </Box>
+                    <Box marginTop="auto">
+                        <ListItemButton onClick={() => {
+                            logout()
+                            handleDrawerToggle()
+                        }}>
+                            <ListItemIcon>
+                                <Logout />
+                            </ListItemIcon>
+                            <ListItemText primary="Logout" />
+                        </ListItemButton>
                     </Box>
                 </Drawer>
             </nav>
