@@ -44,3 +44,25 @@ export interface HistoryResponse {
     message: string
     data: HistoryData
 }
+
+export interface MessageResponse {
+    message: string
+}
+
+export interface SaveHours {
+    userid: number
+    hours: number
+}
+
+export interface SaveHoursResponse extends MessageResponse{
+    entry: SaveHours
+}
+
+export interface SavePermanent {
+    userid: number
+    salary: number
+}
+
+export interface SavePermanentResponse extends MessageResponse{
+    entry: SavePermanent
+}
