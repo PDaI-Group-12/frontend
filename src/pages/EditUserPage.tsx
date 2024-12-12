@@ -126,10 +126,10 @@ export function EditUserPage() {
                                     <Divider/>
                                     {unpaidError && <MultilineTypography>{unpaidError?.message ?? "Something went wrong"}</MultilineTypography>}
                                     {unpaidData && <>
-                                        <MultilineTypography>{unpaidData.unpaid_hours}</MultilineTypography>
-                                        <MultilineTypography>{unpaidData.hourlySalary}</MultilineTypography>
-                                        <MultilineTypography>{unpaidData.unpaid_permanent_salaries}</MultilineTypography>
-                                        <MultilineTypography>{unpaidData.totalSalary}</MultilineTypography>
+                                        <MultilineTypography><b>Unpaid Hours:</b> {unpaidData.data.unpaid_hours}</MultilineTypography>
+                                        <MultilineTypography><b>Hourly Salary:</b> {unpaidData.data.hourlySalary}</MultilineTypography>
+                                        <MultilineTypography><b>Unpaid Permanent Salaries:</b> {unpaidData.data.unpaid_permanent_salaries}</MultilineTypography>
+                                        <MultilineTypography><b>Total Salary:</b> {unpaidData.data.totalSalary}</MultilineTypography>
                                     </>}
                                 </>
                             }
