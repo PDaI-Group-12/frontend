@@ -52,7 +52,7 @@ export function SaveHoursPage() {
                 )
             } else if (type === "salary") {
                 savePermanentMutation.mutate({
-                        userid: decodeToken(token)?.id ?? 0,
+                    userId: decodeToken(token)?.id ?? 0,
                         salary: hours
                     }, {
                         onSuccess: () => {
