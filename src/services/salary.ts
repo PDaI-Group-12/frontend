@@ -1,17 +1,19 @@
 import {useAuth} from "../hooks/useAuth.ts";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {
+    EditUserSalary,
+    EditUserSalaryResponse,
     SalaryPaymentResponse,
     SaveHours,
     SaveHoursResponse,
     SavePermanent,
     SavePermanentResponse,
-    SetHours,
     SetHoursResponse,
     UnPaidSalariesResponse,
     UnpaidSalaryResponse
 } from "./types.ts";
 import {
+    editUsersHourlySalary,
     getUnpaidSalaries,
     getUnpaidSalary,
     markSalaryPayed,
@@ -47,13 +49,26 @@ export const useSavePermanentMutation = () => {
 export const useSetUsersHourlySalary = () => {
     const {token, logout} = useAuth()
     const queryClient = useQueryClient()
-    return useMutation<SetHoursResponse, Error, SetHours>({
+    return useMutation<SetHoursResponse, Error, SavePermanent>({
         mutationKey: ["sethours"],
         mutationFn: (sethours) => setUsersHourlySalary(token, sethours),
         onError: (error) => {
             if (isTokenInvalidByBackend(error.message)) logout()
         },
         onSuccess: (data) => queryClient.invalidateQueries({queryKey: [`user_${data.data.userId}`]})
+    })
+}
+
+export const useEditUsersHourlySalary = () => {
+    const {token, logout} = useAuth()
+    const queryClient = useQueryClient()
+    return useMutation<EditUserSalaryResponse, Error, EditUserSalary>({
+        mutationKey: ["editusersalary"],
+        mutationFn: (edithours) => editUsersHourlySalary(token, edithours),
+        onError: (error) => {
+            if (isTokenInvalidByBackend(error.message)) logout()
+        },
+        onSuccess: (data) => queryClient.invalidateQueries({queryKey: [`user_${data.data.employeeId}`]})
     })
 }
 

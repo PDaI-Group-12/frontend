@@ -4,7 +4,7 @@ import {useUserById} from "../services/user.ts";
 import {Edit, Save} from "@mui/icons-material";
 import {useState} from "react";
 import {Location, useLocation} from "react-router-dom";
-import {useSetUsersHourlySalary} from "../services/salary.ts";
+import {useEditUsersHourlySalary, useSetUsersHourlySalary} from "../services/salary.ts";
 import {enqueueSnackbar} from "notistack";
 
 export function EmployeeProfilePage() {
@@ -12,6 +12,7 @@ export function EmployeeProfilePage() {
     const {state}: Location<{ userId: number }> = useLocation();
     const {userId} = state;
     const setUsersHourlySalary = useSetUsersHourlySalary()
+    const editUsersHourlySalary = useEditUsersHourlySalary()
 
     const {data, status} = useUserById(userId)
 
@@ -46,8 +47,20 @@ export function EmployeeProfilePage() {
                                 setHours(0)
                                 setIsEdit(false)
                             },
-                            onError: (error) => {
-                                enqueueSnackbar(error?.message ?? "Something went wrong", {variant: "error"})
+                            onError: () => {
+                                editUsersHourlySalary.mutate({
+                                    employeeId: userId,
+                                    newSalary: hours
+                                }, {
+                                    onSuccess: (data) => {
+                                        enqueueSnackbar(data?.message ?? "Success", {variant: "success"})
+                                        setHours(0)
+                                        setIsEdit(false)
+                                    },
+                                    onError: (error) => {
+                                        enqueueSnackbar(error?.message ?? "Something went wrong", {variant: "error"})
+                                    }
+                                })
                             }
                         })
                     }}>

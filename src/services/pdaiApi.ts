@@ -1,6 +1,8 @@
 import {
     ApiMessage,
     AuthToken,
+    EditUserSalary,
+    EditUserSalaryResponse,
     EmployeesResponse,
     HistoryResponse,
     MessageResponse,
@@ -9,7 +11,6 @@ import {
     SaveHoursResponse,
     SavePermanent,
     SavePermanentResponse,
-    SetHours,
     SetHoursResponse,
     UnPaidSalariesResponse,
     UnpaidSalaryResponse,
@@ -83,7 +84,7 @@ export const updateUser = async (token: string, user: User): Promise<User> => {
     return await response.json() as User
 }
 
-export const setUsersHourlySalary = async (token: string, setHours: SetHours): Promise<SetHoursResponse> => {
+export const setUsersHourlySalary = async (token: string, setHours: SavePermanent): Promise<SetHoursResponse> => {
     const response = await fetch(`${hostUrl}/salary/hourly`, {
         method: "POST", headers: {
             "Authorization": `Bearer: ${token}`,
@@ -94,6 +95,19 @@ export const setUsersHourlySalary = async (token: string, setHours: SetHours): P
     if (response.status !== 201) throw new Error((await response.json() as ApiMessage).message)
 
     return await response.json() as SetHoursResponse
+}
+
+export const editUsersHourlySalary = async (token: string, userSalary: EditUserSalary): Promise<EditUserSalaryResponse> => {
+    const response = await fetch(`${hostUrl}/salary/${userSalary.employeeId}/salary/edithourly`, {
+        method: "PUT", headers: {
+            "Authorization": `Bearer: ${token}`,
+            "Content-Type": "application/json"
+        }, body: JSON.stringify(userSalary)
+    })
+
+    if (response.status !== 200) throw new Error((await response.json() as ApiMessage).message)
+
+    return await response.json() as EditUserSalaryResponse
 }
 
 export const getEmployees = async (token: string): Promise<EmployeesResponse> => {

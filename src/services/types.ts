@@ -16,6 +16,15 @@ export interface EmployeesResponse extends MessageResponse {
     employees: Employees[]
 }
 
+export interface EditUserSalary {
+    employeeId: number
+    newSalary: number
+}
+
+export interface EditUserSalaryResponse extends MessageResponse {
+    data: EditUserSalary
+}
+
 export interface HistoryData {
     userid: number
     totalhours: number
@@ -48,7 +57,7 @@ export interface SaveHoursResponse extends MessageResponse{
 }
 
 export interface SavePermanent {
-    userid: number
+    userId: number
     salary: number
 }
 
