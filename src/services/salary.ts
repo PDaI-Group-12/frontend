@@ -1,6 +1,7 @@
 import {useAuth} from "../hooks/useAuth.ts";
 import {useMutation, useQuery} from "@tanstack/react-query";
 import {
+    SalaryPaymentResponse,
     SaveHours,
     SaveHoursResponse,
     SavePermanent,
@@ -8,8 +9,9 @@ import {
     UnPaidSalariesResponse,
     UnpaidSalaryResponse
 } from "./types.ts";
-import {getUnpaidSalaries, getUnpaidSalary, saveHours, savePermanent} from "./pdaiApi.ts";
+import {getUnpaidSalaries, getUnpaidSalary, markSalaryPayed, saveHours, savePermanent} from "./pdaiApi.ts";
 import {isTokenInvalidByBackend} from "../util/validator.ts";
+import {decodeToken} from "../util/text.ts";
 
 export const useSaveHoursMutation = () => {
     const {token, logout} = useAuth()
@@ -46,5 +48,17 @@ export const useUnPaidSalaries = () => {
     return useQuery<UnPaidSalariesResponse, Error>({
         queryKey: ["unpaidsalaries"],
         queryFn: () => getUnpaidSalaries(token)
+    })
+}
+
+export const useMarkSalaryPayedMutation = () => {
+    const {token, logout} = useAuth()
+    const id = decodeToken(token)?.id ?? 0
+    return useMutation<SalaryPaymentResponse, Error, number>({
+        mutationKey: ["salarypayed"],
+        mutationFn: (employeeId) => markSalaryPayed(token, employeeId, id),
+        onError: (error) => {
+            if (isTokenInvalidByBackend(error.message)) logout()
+        }
     })
 }

@@ -2,29 +2,56 @@ import {Button, Card, CardContent, Checkbox, FormControlLabel, Stack, Typography
 import {useEffect, useState} from "react";
 import {AutoColoredAvatar} from "../components/AutoColoredAvatar.tsx";
 import {useLabel} from "../hooks/useLabel.ts";
+import {useMarkSalaryPayedMutation} from "../services/salary.ts";
+import {type Location, useLocation, useNavigate} from "react-router-dom";
+import {UnpaidSalaries} from "../services/types.ts";
+import {useSnackbar} from "notistack";
 
 export function RequestPaymentPage() {
+
+    const markSalaryPayedMutation = useMarkSalaryPayedMutation()
 
     const [isChecked, setIsChecked] = useState(false)
 
     const {setLabel} = useLabel()
+    const {enqueueSnackbar} = useSnackbar();
 
-    useEffect(() => setLabel("Payment {id}"))
+    const navigate = useNavigate()
+    const {state}: Location<{ unpaidSalary: UnpaidSalaries }> = useLocation();
+    const {unpaidSalary} = state;
+
+    console.log(state)
+
+    useEffect(() => setLabel(`Payment ${unpaidSalary.firstname} ${unpaidSalary.lastname}`))
 
     return (
         <Card>
             <CardContent>
                 <Stack spacing={2} alignItems="center">
-                    <AutoColoredAvatar text="MM"/>
-                    <Typography variant="h6">Matti Meikäläinen</Typography>
-                    <Typography variant="subtitle2" color="darkgrey">FI 1234 1234 12</Typography>
-                    <Typography color="gray" fontWeight="bold" variant="subtitle2">2000€</Typography>
+                    <AutoColoredAvatar text={`${unpaidSalary.firstname} ${unpaidSalary.lastname}`}/>
+                    <Typography variant="h6">{unpaidSalary.firstname} {unpaidSalary.lastname}</Typography>
+                    <Typography variant="subtitle2" color="darkgrey">{unpaidSalary.iban}</Typography>
+                    <Typography color="gray" fontWeight="bold" variant="subtitle2">
+                        {unpaidSalary.unpaid_permanent_salaries !== 0
+                            ? `${unpaidSalary.unpaid_permanent_salaries} €`
+                            : `${unpaidSalary.unpaid_hours} €`}
+                    </Typography>
                     <FormControlLabel control={<Checkbox
                         checked={isChecked}
                         onChange={() => setIsChecked(prevState => !prevState)}
                     ></Checkbox>} label="Confirm Payment"></FormControlLabel>
 
-                    <Button variant="contained" type="submit" disabled={!isChecked}>Send payment</Button>
+                    <Button variant="contained" disabled={!isChecked} onClick={() => {
+                        markSalaryPayedMutation.mutate(unpaidSalary.userid, {
+                            onSuccess: (data) => {
+                                enqueueSnackbar(data?.message ?? "Success", {variant: "success"})
+                                navigate(-1)
+                            },
+                            onError: (error) => {
+                                enqueueSnackbar(error?.message ?? "Something went wrong", {variant: "error"})
+                            }
+                        })
+                    }}>Send payment</Button>
                 </Stack>
             </CardContent>
         </Card>

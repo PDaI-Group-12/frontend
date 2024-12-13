@@ -4,6 +4,7 @@ import {
     EmployeesResponse,
     HistoryResponse,
     MessageResponse,
+    SalaryPaymentResponse,
     SaveHours,
     SaveHoursResponse,
     SavePermanent,
@@ -136,6 +137,7 @@ export const deleteUser = async (token: string): Promise<MessageResponse> => {
             "Authorization": `Bearer: ${token}`
         }
     })
+
     if (response.status !== 200) throw new Error((await response.json() as ApiMessage).message)
 
     return await response.json() as MessageResponse
@@ -147,6 +149,7 @@ export const registerUser = async (register: User): Promise<MessageResponse> => 
             "Content-Type": "application/json"
         }, body: JSON.stringify(register)
     })
+
     if (response.status !== 201) throw new Error((await response.json() as ApiMessage).message)
 
     return await response.json() as MessageResponse
@@ -158,7 +161,20 @@ export const getUnpaidSalaries = async (token: string): Promise<UnPaidSalariesRe
             "Authorization": `Bearer: ${token}`
         }
     })
+
     if (response.status !== 200) throw new Error((await response.json() as ApiMessage).message)
 
     return await response.json() as UnPaidSalariesResponse
+}
+
+export const markSalaryPayed = async (token: string, employeeId: number, employerId: number): Promise<SalaryPaymentResponse> => {
+    const response = await fetch(`${hostUrl}/salary/${employeeId}/payment/${employerId}`, {
+        headers: {
+            "Authorization": `Bearer: ${token}`
+        }
+    })
+
+    if (response.status !== 200) throw new Error((await response.json() as ApiMessage).message)
+
+    return await response.json() as SalaryPaymentResponse
 }

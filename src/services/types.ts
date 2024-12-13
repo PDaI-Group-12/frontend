@@ -75,17 +75,20 @@ export interface UnpaidSalary {
     totalSalary: number
 }
 
-export interface UnpaidSalaries {
-    userid: number
+export interface UnpaidSalaries extends UnpaidSalary {
     firstname: string
     lastname: string
-    unpaid_hours: number
-    hourlySalary: number
-    unpaid_permanent_salaries: number
-    totalSalary: number
     iban: string
 }
 
 export interface UnPaidSalariesResponse extends MessageResponse {
     data: UnpaidSalaries[]
+}
+
+export interface SalaryPaymentResponse extends MessageResponse {
+    employeeId: number
+    totalHours: number
+    hourlySalary: number
+    permanentSalary: number
+    totalSalary: number
 }

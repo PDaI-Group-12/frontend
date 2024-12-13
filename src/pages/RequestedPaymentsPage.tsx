@@ -3,12 +3,14 @@ import {useLabel} from "../hooks/useLabel.ts";
 import {AutoColoredAvatar} from "../components/AutoColoredAvatar.tsx";
 import {useEffect} from "react";
 import {useUnPaidSalaries} from "../services/salary.ts";
+import {useNavigate} from "react-router-dom";
 
 export default function RequestedPaymentsPage() {
 
     const {setLabel} = useLabel()
     const {data, status, error} = useUnPaidSalaries()
-    console.log(data)
+
+    const navigate = useNavigate();
 
     useEffect(() => setLabel("Requested Payments"))
 
@@ -24,18 +26,18 @@ export default function RequestedPaymentsPage() {
 
     return (
         <Stack spacing={2}>
-            {status === "success" && data.data.map((data, index) => <Card key={index + 1}>
-                <CardActionArea>
+            {status === "success" && data.data.map((unpaidSalary, index) => <Card key={index + 1}>
+                <CardActionArea onClick={() => navigate('/request-payments', {state: {unpaidSalary: unpaidSalary}})}>
                     <CardContent>
                         <Stack direction="row" spacing={2} alignItems="center">
-                            <AutoColoredAvatar text={`${data.firstname[0]}${data.lastname[0]}`}/>
+                            <AutoColoredAvatar text={`${unpaidSalary.firstname[0]}${unpaidSalary.lastname[0]}`}/>
                             <Stack flexGrow={1}>
-                                <Typography variant="h6">{data.firstname} {data.lastname}</Typography>
-                                <Typography color="darkgrey" variant="subtitle2">{data.iban}</Typography>
+                                <Typography variant="h6">{unpaidSalary.firstname} {unpaidSalary.lastname}</Typography>
+                                <Typography color="darkgrey" variant="subtitle2">{unpaidSalary.iban}</Typography>
                                 <Typography color="gray" fontWeight="bold" variant="subtitle2" align="right">
-                                    {data.unpaid_permanent_salaries !== 0
-                                        ? `${data.unpaid_permanent_salaries} €`
-                                        : `${data.unpaid_hours} €`}
+                                    {unpaidSalary.unpaid_permanent_salaries !== 0
+                                        ? `${unpaidSalary.unpaid_permanent_salaries} €`
+                                        : `${unpaidSalary.unpaid_hours} €`}
                                 </Typography>
                             </Stack>
                         </Stack>
