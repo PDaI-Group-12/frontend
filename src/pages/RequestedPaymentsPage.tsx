@@ -30,7 +30,7 @@ export default function RequestedPaymentsPage() {
                 <CardActionArea onClick={() => navigate('/request-payments', {state: {unpaidSalary: unpaidSalary}})}>
                     <CardContent>
                         <Stack direction="row" spacing={2} alignItems="center">
-                            <AutoColoredAvatar text={`${unpaidSalary.firstname[0]}${unpaidSalary.lastname[0]}`}/>
+                            <AutoColoredAvatar text={`${unpaidSalary.firstname} ${unpaidSalary.lastname}`}/>
                             <Stack flexGrow={1}>
                                 <Typography variant="h6">{unpaidSalary.firstname} {unpaidSalary.lastname}</Typography>
                                 <Typography color="darkgrey" variant="subtitle2">{unpaidSalary.iban}</Typography>

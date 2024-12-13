@@ -28,7 +28,7 @@ export function EmployeesPage() {
                 <CardActionArea>
                     <CardContent>
                         <Stack direction="row" spacing={2} alignItems="center">
-                            <AutoColoredAvatar text={`${employ.firstname[0]}${employ.lastname[0]}`}/>
+                            <AutoColoredAvatar text={`${employ.firstname} ${employ.lastname}`}/>
                             <Stack>
                                 <Typography variant="h6">{employ.firstname} {employ.lastname}</Typography>
                             </Stack>
