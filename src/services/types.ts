@@ -81,10 +81,10 @@ export interface UnpaidSalaryResponse extends MessageResponse {
     data: UnpaidSalary
 }
 
-export interface UnpaidSalaries extends UnpaidSalary {
-    firstname: string
-    lastname: string
-    iban: string
+export interface UnpaidSalaries {
+    id: number
+    userid: number
+    hours: number
 }
 
 export interface UnPaidSalariesResponse extends MessageResponse {

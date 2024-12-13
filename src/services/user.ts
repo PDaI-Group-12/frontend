@@ -20,6 +20,15 @@ export const useUserById = (userId: number) => {
     });
 }
 
+export const useUsersByIds = (userIds: number[]) => {
+    const {token} = useAuth()
+    return useQuery<UserWithSalary[], Error>({
+        queryKey: userIds.map(id => `user_${id}`),
+        queryFn: () => Promise.all(userIds.map(id => getUserById(token, id))),
+        enabled: userIds.length > 0
+    });
+}
+
 export const useUserEditMutation = () => {
     const {token, logout} = useAuth()
     const queryClient = useQueryClient()

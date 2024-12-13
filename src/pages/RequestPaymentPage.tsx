@@ -4,7 +4,7 @@ import {AutoColoredAvatar} from "../components/AutoColoredAvatar.tsx";
 import {useLabel} from "../hooks/useLabel.ts";
 import {useMarkSalaryPayedMutation} from "../services/salary.ts";
 import {type Location, useLocation, useNavigate} from "react-router-dom";
-import {UnpaidSalaries} from "../services/types.ts";
+import {UnpaidSalaries, UserWithSalary} from "../services/types.ts";
 import {useSnackbar} from "notistack";
 
 export function RequestPaymentPage() {
@@ -17,24 +17,33 @@ export function RequestPaymentPage() {
     const {enqueueSnackbar} = useSnackbar();
 
     const navigate = useNavigate()
-    const {state}: Location<{ unpaidSalary: UnpaidSalaries }> = useLocation();
-    const {unpaidSalary} = state;
+    const {state}: Location<{ unpaidSalary: UnpaidSalaries, user: UserWithSalary }> = useLocation();
+    const {unpaidSalary, user} = state;
+
+    const salary = (): number => {
+        if (Number.isInteger(user.hourlySalary)) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
+            return user.hourlySalary
+        }
+        return 0
+    }
 
     console.log(state)
 
-    useEffect(() => setLabel(`Payment ${unpaidSalary.firstname} ${unpaidSalary.lastname}`))
+    useEffect(() => setLabel(`Payment ${user.user.firstname} ${user.user.lastname}`))
 
     return (
         <Card>
             <CardContent>
                 <Stack spacing={2} alignItems="center">
-                    <AutoColoredAvatar text={`${unpaidSalary.firstname} ${unpaidSalary.lastname}`}/>
-                    <Typography variant="h6">{unpaidSalary.firstname} {unpaidSalary.lastname}</Typography>
-                    <Typography variant="subtitle2" color="darkgrey">{unpaidSalary.iban}</Typography>
-                    <Typography color="gray" fontWeight="bold" variant="subtitle2">
-                        {unpaidSalary.unpaid_permanent_salaries !== 0
-                            ? `${unpaidSalary.unpaid_permanent_salaries} €`
-                            : `${unpaidSalary.unpaid_hours} €`}
+                    <AutoColoredAvatar text={`${user.user.firstname} ${user.user.lastname}`}/>
+                    <Typography variant="h6">{user.user.firstname} {user.user.lastname}</Typography>
+                    <Typography variant="subtitle2" color="darkgrey">{user.user.iban}</Typography>
+                    <Typography color="gray" fontWeight="bold" variant="subtitle2" textAlign="center">
+                        {unpaidSalary.hours} h + {salary()} €
+                        <br/>
+                        {salary() * unpaidSalary.hours} h/€
                     </Typography>
                     <FormControlLabel control={<Checkbox
                         checked={isChecked}
