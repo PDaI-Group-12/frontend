@@ -3,12 +3,13 @@ import {useLabel} from "../hooks/useLabel.ts";
 import {AutoColoredAvatar} from "../components/AutoColoredAvatar.tsx";
 import {useEffect} from "react";
 import {useEmployees} from "../services/employees.ts";
+import {useNavigate} from "react-router-dom";
 
 export function EmployeesPage() {
 
     const {data, status, error} = useEmployees()
-    console.log(data)
     const {setLabel} = useLabel()
+    const navigate = useNavigate()
 
     useEffect(() => setLabel("Employees"))
 
@@ -25,7 +26,7 @@ export function EmployeesPage() {
     return (
         <Stack spacing={2}>
             {status === "success" && data.employees.map((employ) => <Card key={employ.id}>
-                <CardActionArea>
+                <CardActionArea onClick={() => navigate('/employee-profile', {state: {userId: employ.id}})}>
                     <CardContent>
                         <Stack direction="row" spacing={2} alignItems="center">
                             <AutoColoredAvatar text={`${employ.firstname} ${employ.lastname}`}/>

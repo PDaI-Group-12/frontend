@@ -18,6 +18,7 @@ import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {SnackbarProvider} from "notistack";
 import {ProtectedRoute} from "./components/ProtectedRoute.tsx";
 import {RegisterUserPage} from "./pages/RegisterUserPage.tsx";
+import {EmployeeProfilePage} from "./pages/EmployeeProfilePage.tsx";
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
@@ -45,6 +46,8 @@ createRoot(document.getElementById('root')!).render(
                                                    element={<ProtectedRoute children={<RequestedPaymentsPage/>}/>}/>
                                             <Route path="register"
                                                    element={<ProtectedRoute children={<RegisterUserPage/>}/>}/>
+                                            <Route path="employee-profile"
+                                                   element={<ProtectedRoute children={<EmployeeProfilePage/>}/>}/>
                                         </Route>
                                     ), {
                                         basename: "/frontend"

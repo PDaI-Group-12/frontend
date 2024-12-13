@@ -1,4 +1,4 @@
-import {deleteUser, getUser, registerUser, updateUser} from "./pdaiApi.ts";
+import {deleteUser, getUser, getUserById, registerUser, updateUser} from "./pdaiApi.ts";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {MessageResponse, User, UserWithSalary} from "./types.ts";
 import {useAuth} from "../hooks/useAuth.ts";
@@ -9,6 +9,14 @@ export const useUser = () => {
     return useQuery<UserWithSalary, Error>({
         queryKey: ["user"],
         queryFn: () => getUser(token).then(data => data),
+    });
+}
+
+export const useUserById = (userId: number) => {
+    const {token} = useAuth()
+    return useQuery<UserWithSalary, Error>({
+        queryKey: [`user_${userId}`],
+        queryFn: () => getUserById(token, userId).then(data => data),
     });
 }
 

@@ -56,6 +56,10 @@ export interface SavePermanentResponse extends MessageResponse{
     entry: SavePermanent
 }
 
+export interface SetHoursResponse extends MessageResponse {
+    data: SavePermanent
+}
+
 export interface UnpaidSalary {
     userid: number
     unpaid_hours: number
