@@ -1,36 +1,42 @@
-import {Card, CardActionArea, CardContent, Stack, Typography} from "@mui/material";
-import {Employee} from "./types.ts";
-import {toPascalCase} from "../util/text.ts";
+import {Box, Card, CardActionArea, CardContent, CircularProgress, Stack, Typography} from "@mui/material";
 import {useLabel} from "../hooks/useLabel.ts";
 import {AutoColoredAvatar} from "../components/AutoColoredAvatar.tsx";
+import {useEffect} from "react";
+import {useEmployees} from "../services/employees.ts";
+import {useNavigate} from "react-router-dom";
 
 export function EmployeesPage() {
-    const sampleEmployees: Employee[] = [
-        {id: 1, fname: "John", lname: "Doe", iban: "FI 1234 123 12", role: "worker"},
-        {id: 2, fname: "Mary", lname: "Poppins", iban: "FI 4321 321 21", role: "worker"},
-        {id: 3, fname: "Harry", lname: "Potter", iban: "FI 3456 456 56", role: "employer"}
-    ];
 
-    useLabel().setLabel("Employees")
+    const {data, status, error} = useEmployees()
+    const {setLabel} = useLabel()
+    const navigate = useNavigate()
+
+    useEffect(() => setLabel("Employees"))
+
+    if (status === "pending") {
+        return <Box flexGrow={1} alignItems="center">
+            <CircularProgress/>
+        </Box>;
+    }
+
+    if (status === "error") {
+        return <Typography> {error?.message ?? "Something went wrong"}</Typography>
+    }
 
     return (
         <Stack spacing={2}>
-            {sampleEmployees.map((employee) => (
-                <Card key={employee.id}>
-                    <CardActionArea>
-                        <CardContent>
-                            <Stack direction="row" spacing={2} alignItems="center">
-                                <AutoColoredAvatar text={`${employee.fname[0]}${employee.lname[0]}`}/>
-                                <Stack>
-                                    <Typography variant="h6">{employee.fname} {employee.lname}</Typography>
-                                    <Typography color="darkgrey"
-                                                variant="subtitle2"> {toPascalCase(employee.role)} </Typography>
-                                </Stack>
+            {status === "success" && data.employees.map((employ) => <Card key={employ.id}>
+                <CardActionArea onClick={() => navigate('/employee-profile', {state: {userId: employ.id}})}>
+                    <CardContent>
+                        <Stack direction="row" spacing={2} alignItems="center">
+                            <AutoColoredAvatar text={`${employ.firstname} ${employ.lastname}`}/>
+                            <Stack>
+                                <Typography variant="h6">{employ.firstname} {employ.lastname}</Typography>
                             </Stack>
-                        </CardContent>
-                    </CardActionArea>
-                </Card>
-            ))}
+                        </Stack>
+                    </CardContent>
+                </CardActionArea>
+            </Card>)}
         </Stack>
     );
 }

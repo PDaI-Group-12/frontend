@@ -1,3 +1,10 @@
+import {decodeToken} from "./text.ts";
+
+export const isUsernameInvalid = (username: string): boolean => {
+    //TODO Replace it with regex later after meeting with a team
+    return !(username.length > 0)
+}
+
 export const isPasswordInvalid = (password: string): boolean => {
     //TODO Replace it with regex later after meeting with a team
     return !(password.length > 0)
@@ -14,3 +21,12 @@ export const isLastNameInvalid = (lastname: string): boolean => {
 }
 
 export const isIBANInvalid = (iban: string): boolean => !/^[A-Z]{2}\d{2}[A-Z0-9]{1,30}$/.test(iban.replace(/\s+/g, ''));
+
+export const isTokenExpired = (token: string): boolean => {
+    const payload = decodeToken(token);
+    return !payload || payload.exp * 1000 < Date.now();
+};
+
+export const isTokenInvalidByBackend = (error: string) => {
+    return error === "Invalid token"
+}

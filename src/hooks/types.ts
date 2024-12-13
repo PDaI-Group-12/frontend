@@ -5,15 +5,12 @@ export interface DefaultProvidersProps {
     children: ReactNode
 }
 
-export interface AuthProviderProps extends DefaultProvidersProps {
-    userToken: string
-}
-
 /*   Content   */
 export interface AuthContent {
-    token: string
-    setToken: Dispatch<SetStateAction<string>>
-    isAuthorized: boolean
+    token: string;
+    isAuthorized: boolean;
+    login: (token: string) => void;
+    logout: () => void;
 }
 
 export interface ColorModeContent {

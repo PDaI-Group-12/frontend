@@ -1,3 +1,5 @@
+import {TokenPayload} from "./types.ts";
+
 export function toPascalCase(value: string): string {
     return value.replace(/\w+/g, (w) => w[0].toUpperCase() + w.slice(1).toLowerCase());
 }
@@ -18,4 +20,12 @@ export function stringToColor(string: string) {
     }
 
     return color;
+}
+
+export const decodeToken = (token: string): TokenPayload | undefined => {
+    try {
+        return JSON.parse(atob(token.split(".")[1])) as TokenPayload
+    } catch {
+        return undefined
+    }
 }

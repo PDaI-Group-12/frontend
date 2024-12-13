@@ -4,8 +4,10 @@ import {AuthContent} from "./types";
 export const AuthContext = createContext<AuthContent>({
     token: "",
     isAuthorized: false,
-    setToken: () => {
-    }
+    login: () => {
+    },
+    logout: () => {
+    },
 });
 
 export const useAuth = () => useContext(AuthContext);
