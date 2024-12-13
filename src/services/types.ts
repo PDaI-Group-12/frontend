@@ -1,34 +1,19 @@
-export interface AuthToken extends MessageResponse {
-    token: string
-}
-
 export interface ApiMessage extends MessageResponse {
     code: number
 }
 
-export interface UserWithSalary {
-    user: User,
-    hourlySalary: string
-}
-
-export interface User {
-    id?: number
-    firstname?: string
-    lastname?: string
-    username?: string
-    password?: string
-    role?: string
-    iban?: string
-}
-
-export interface EmployeesResponse extends MessageResponse {
-    employees: Employees[]
+export interface AuthToken extends MessageResponse {
+    token: string
 }
 
 export interface Employees {
     id: number
     firstname: string
     lastname: string
+}
+
+export interface EmployeesResponse extends MessageResponse {
+    employees: Employees[]
 }
 
 export interface HistoryData {
@@ -43,6 +28,14 @@ export interface HistoryResponse extends MessageResponse {
 
 export interface MessageResponse {
     message: string
+}
+
+export interface SalaryPaymentResponse extends MessageResponse {
+    employeeId: number
+    totalHours: number
+    hourlySalary: number
+    permanentSalary: number
+    totalSalary: number
 }
 
 export interface SaveHours {
@@ -63,16 +56,16 @@ export interface SavePermanentResponse extends MessageResponse{
     entry: SavePermanent
 }
 
-export interface UnpaidSalaryResponse extends MessageResponse {
-    data: UnpaidSalary
+export interface UnpaidSalary {
+    userid: number
+    unpaid_hours: number
+    hourlySalary: number
+    unpaid_permanent_salaries: number
+    totalSalary: number
 }
 
-export interface UnpaidSalary {
-    userid: number,
-    unpaid_hours: number,
-    hourlySalary: number,
-    unpaid_permanent_salaries: number,
-    totalSalary: number
+export interface UnpaidSalaryResponse extends MessageResponse {
+    data: UnpaidSalary
 }
 
 export interface UnpaidSalaries extends UnpaidSalary {
@@ -85,10 +78,17 @@ export interface UnPaidSalariesResponse extends MessageResponse {
     data: UnpaidSalaries[]
 }
 
-export interface SalaryPaymentResponse extends MessageResponse {
-    employeeId: number
-    totalHours: number
-    hourlySalary: number
-    permanentSalary: number
-    totalSalary: number
+export interface User {
+    id?: number
+    firstname?: string
+    lastname?: string
+    username?: string
+    password?: string
+    role?: string
+    iban?: string
+}
+
+export interface UserWithSalary {
+    user: User,
+    hourlySalary: string
 }
