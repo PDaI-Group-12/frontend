@@ -19,7 +19,18 @@ import {
     Typography,
     useTheme
 } from "@mui/material";
-import {AttachMoney, DarkMode, Groups, History, LightMode, Logout, Menu, People, Timelapse} from "@mui/icons-material";
+import {
+    AttachMoney,
+    DarkMode,
+    Engineering,
+    Groups,
+    History,
+    LightMode,
+    Logout,
+    Menu,
+    People,
+    Timelapse
+} from "@mui/icons-material";
 import {useState} from "react";
 import {useThemeSwitch} from "../hooks/useThemeSwitch.ts";
 import {useLabel} from "../hooks/useLabel.ts";
@@ -45,6 +56,7 @@ export function RootPage() {
     const navigateToSaveHours = () => navigate("/save-hours")
     const navigateToRequestedPayments = () => navigate("/requested-payments")
     const navigateToRegisterUser = () => navigate("/register")
+    const navigateToEmployeesList = () => navigate("/employees")
 
     const handleDrawerToggle = () => setMobileOpen((prevState) => !prevState);
 
@@ -84,6 +96,9 @@ export function RootPage() {
                             {emploRole && <>
                                 <Button color="inherit" onClick={navigateToRequestedPayments}>
                                     Requested Payments
+                                </Button>
+                                <Button color="inherit" onClick={navigateToEmployeesList}>
+                                    Employees
                                 </Button>
                                 <Button color="inherit" onClick={navigateToRegisterUser}>
                                     Register User
@@ -176,6 +191,15 @@ export function RootPage() {
                                         <AttachMoney/>
                                     </ListItemIcon>
                                     <ListItemText primary="Requested Payments"/>
+                                </ListItemButton>
+                                <ListItemButton onClick={() => {
+                                    handleDrawerToggle()
+                                    navigateToEmployeesList()
+                                }}>
+                                    <ListItemIcon>
+                                        <Engineering/>
+                                    </ListItemIcon>
+                                    <ListItemText primary="Employees"/>
                                 </ListItemButton>
                                 <ListItemButton onClick={() => {
                                     handleDrawerToggle()
